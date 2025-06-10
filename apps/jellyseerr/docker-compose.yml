@@ -1,0 +1,21 @@
+name: jellyseerr
+services:
+  app:
+    container_name: jellyseerr
+    image: fallenbagel/jellyseerr:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: Jellyseerr
+    environment:
+      LOG_LEVEL: info
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 5055
+        published: "5055"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/big-bear-jellyseerr/config
+        target: /app/config
