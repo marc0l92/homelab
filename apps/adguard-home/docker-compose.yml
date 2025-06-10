@@ -37,10 +37,10 @@ services:
         restart: unless-stopped
         volumes:
             - type: bind
-              source: /DATA/AppData/adguard-home/opt/adguardhome/conf
+              source: /DATA/AppData/adguard-home/conf
               target: /opt/adguardhome/conf
             - type: bind
-              source: /DATA/AppData/adguard-home/opt/adguardhome/work
+              source: /DATA/AppData/adguard-home/work
               target: /opt/adguardhome/work
         x-casaos:
             envs:
