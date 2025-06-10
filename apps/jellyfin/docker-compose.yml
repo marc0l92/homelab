@@ -1,0 +1,48 @@
+name: jellyfin
+services:
+  jellyfin:
+    container_name: jellyfin
+    image: linuxserver/jellyfin:10.10.6
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: jellyfin
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 8096
+        published: "8096"
+        protocol: tcp
+      - target: 8920
+        published: "8920"
+        protocol: tcp
+      - target: 7359
+        published: "7359"
+        protocol: tcp
+      - target: 1900
+        published: "1900"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/jellyfin/config
+        target: /config
+      - type: bind
+        source: /DATA
+        target: /DATA
+      - type: bind
+        source: /opt/vc/lib
+        target: /opt/vc/lib
+      - type: bind
+        source: /media
+        target: /media
+      - type: bind
+        source: /mnt
+        target: /mnt
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/vcsm:/dev/vcsm
+      - /dev/vchiq:/dev/vchiq
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
