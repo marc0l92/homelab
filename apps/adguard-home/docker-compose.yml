@@ -5,6 +5,7 @@ services:
     image: adguard/adguardhome:latest
     network_mode: bridge
     restart: unless-stopped
+    hostname: adguard-home
     command:
       - --no-check-update
       - -c
