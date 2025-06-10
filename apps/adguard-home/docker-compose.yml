@@ -13,7 +13,7 @@ services:
     image: adguard/adguardhome:latest
     network_mode: bridge
     ports:
-      # DNX
+      # DNS
       - target: 53
         published: "53"
         protocol: tcp
@@ -21,18 +21,18 @@ services:
         published: "53"
         protocol: udp
 
-        # DHCP
-      - target: 67
-        published: "68"
-        protocol: udp
-      - target: 68
-        published: "68"
-        protocol: tcp
-      - target: 68
-        published: "68"
-        protocol: udp
+      # DHCP
+      # - target: 67
+      #   published: "68"
+      #   protocol: udp
+      # - target: 68
+      #   published: "68"
+      #   protocol: tcp
+      # - target: 68
+      #   published: "68"
+      #   protocol: udp
 
-        # Admin Panel
+      # Admin Panel
       - target: 80
         published: "3002"
         protocol: tcp
@@ -43,7 +43,7 @@ services:
         published: "3003"
         protocol: udp
 
-        # DNS Over TLS
+      # DNS Over TLS
       - target: 853
         published: "853"
         protocol: tcp
