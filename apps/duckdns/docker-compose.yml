@@ -1,0 +1,20 @@
+name: duckdns
+services:
+  duckdns:
+    container_name: duckdns
+    image: lscr.io/linuxserver/duckdns:latest
+    network_mode: host
+    restart: unless-stopped
+    hostname: duckdns
+    environment:
+      LOG_FILE: "false"
+      PGID: "1000"
+      PUID: "1000"
+      SUBDOMAINS: lucarotto
+      TOKEN: f5ea9227-1d9b-453c-900a-f9fe5068c52a
+      TZ: Etc/UTC
+      UPDATE_IP: ipv6
+    volumes:
+      - type: bind
+        source: /DATA/AppData/duckdns
+        target: /config
