@@ -13,8 +13,7 @@ services:
       - -w
       - /opt/adguardhome/work
     environment:
-      OPENAI_API_KEY: sk-xxxxxx
-      PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      TZ: Etc/UTC
     ports:
       # DNS
       - target: 53
