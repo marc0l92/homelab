@@ -1,0 +1,89 @@
+name: immich
+services:
+  immich-server:
+    container_name: immich-server
+    image: ghcr.io/immich-app/immich-server:release
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: immich-server
+    depends_on:
+      database:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      DB_DATABASE_NAME: immich
+      DB_HOSTNAME: immich-postgres
+      DB_PASSWORD: casfdsifosjdiioshf
+      DB_PORT: "5432"
+      DB_USERNAME: immich
+      IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
+      REDIS_HOSTNAME: immich-redis
+    ports:
+      - mode: ingress
+        target: 2283
+        published: "2283"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /mnt/data/Gallery/immich
+        target: /usr/src/app/upload
+      - type: bind
+        source: /mnt/data/Gallery/kDrive
+        target: /usr/src/app/libraries
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+    healthcheck:
+      disable: false
+
+  immich-machine-learning:
+    container_name: immich-machine-learning
+    image: ghcr.io/immich-app/immich-machine-learning:release
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: immich-machine-learning
+    environment:
+      DB_DATABASE_NAME: immich
+      DB_HOSTNAME: immich-postgres
+      DB_PASSWORD: casfdsifosjdiioshf
+      DB_PORT: "5432"
+      DB_USERNAME: immich
+      REDIS_HOSTNAME: immich-redis
+    volumes:
+      - type: volume
+        source: /DATA/AppData/immich/model-cache
+        target: model-cache
+    healthcheck:
+      disable: false
+
+  redis:
+    container_name: immich-redis
+    image: docker.io/valkey/valkey:8-bookworm@sha256:ff21bc0f8194dc9c105b769aeabf9585fea6a8ed649c0781caeac5cb3c247884
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: immich-redis
+    healthcheck:
+      test: redis-cli ping || exit 1
+
+  database:
+    container_name: immich-postgres
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: immich-postgres
+    environment:
+      POSTGRES_PASSWORD: casfdsifosjdiioshf
+      POSTGRES_USER: immich
+      POSTGRES_DB: immich
+      POSTGRES_INITDB_ARGS: '--data-checksums'
+    volumes:
+      - type: bind
+        source: /DATA/AppData/immich/pgdata
+        target: /var/lib/postgresql/data
+
+volumes:
+  model-cache:
