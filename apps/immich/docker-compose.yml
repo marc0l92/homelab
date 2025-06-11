@@ -7,10 +7,10 @@ services:
     restart: unless-stopped
     hostname: immich-server
     depends_on:
-      database:
+      immich-postgres:
         condition: service_started
         required: true
-      redis:
+      immich-redis:
         condition: service_started
         required: true
     environment:
