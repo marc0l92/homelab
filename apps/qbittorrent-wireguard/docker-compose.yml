@@ -1,4 +1,4 @@
-name: hungry_erik
+name: qbittorrent-wireguard
 services:
   qbittorrent-wireguard:
     container_name: qbittorrent-wireguard
