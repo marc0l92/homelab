@@ -1,11 +1,4 @@
-networks:
-  servarrnetwork:
-    name: servarrnetwork
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.39.0.0/24
-
+name: servarr
 services:
   gluetun:
     container_name: gluetun
@@ -184,3 +177,11 @@ services:
   #   networks:
   #     servarrnetwork:
   #       ipv4_address: 172.39.0.6
+
+networks:
+  servarrnetwork:
+    name: servarrnetwork
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.39.0.0/24
