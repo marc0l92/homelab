@@ -1,0 +1,25 @@
+name: telegram-files
+services:
+  telegram-files:
+    container_name: telegram-files
+    image: ghcr.io/jarvis2f/telegram-files:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: telegram-files
+    environment:
+      APP_ENV: prod
+      APP_ROOT: /app/data
+      TELEGRAM_API_HASH: bd3351253ad4376ddc9f3214589ebf93
+      TELEGRAM_API_ID: "79100"
+      TELEGRAM_LOG_LEVEL: "2"
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 80
+        published: "7745"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/telegram-files
+        target: /app/data

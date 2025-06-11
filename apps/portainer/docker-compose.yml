@@ -1,0 +1,29 @@
+name: portainer
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:2.30.1
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: portainer
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 8000
+        published: "8000"
+        protocol: tcp
+      - target: 9000
+        published: "9000"
+        protocol: tcp
+      - target: 9443
+        published: "9443"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/portainer
+        target: /data
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
