@@ -39,7 +39,6 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     restart: unless-stopped
     network_mode: service:gluetun
-    hostname: qbittorrent
     labels:
       - deunhealth.restart.on.unhealthy=true
     environment:
@@ -67,7 +66,6 @@ services:
     container_name: deunhealth
     image: qmcgaw/deunhealth
     network_mode: none
-    hostname: deunhealth
     environment:
       LOG_LEVEL: info
       HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
@@ -83,7 +81,6 @@ services:
     image: lscr.io/linuxserver/nzbget:latest
     restart: unless-stopped
     network_mode: service:gluetun
-    hostname: nzbget
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -102,7 +99,6 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     restart: unless-stopped
     network_mode: service:gluetun
-    hostname: prowlarr
     environment:
       PGID: "1000"
       PUID: "1000"
