@@ -22,7 +22,10 @@ services:
     volumes:
       - /DATA/AppData/servarr/gluetun:/gluetun
     env_file:
-      - stack.env
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
     cap_add:
       - NET_ADMIN
     healthcheck:
