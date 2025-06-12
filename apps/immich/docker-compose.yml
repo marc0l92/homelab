@@ -17,11 +17,13 @@ services:
     environment:
       DB_DATABASE_NAME: immich
       DB_HOSTNAME: immich-postgres
-      DB_PASSWORD: casfdsifosjdiioshf
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: "5432"
-      DB_USERNAME: immich
       IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
       REDIS_HOSTNAME: immich-redis
+    env_file:
+      - stack.env
     ports:
       - mode: ingress
         target: 2283
@@ -51,10 +53,12 @@ services:
     environment:
       DB_DATABASE_NAME: immich
       DB_HOSTNAME: immich-postgres
-      DB_PASSWORD: casfdsifosjdiioshf
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: "5432"
-      DB_USERNAME: immich
       REDIS_HOSTNAME: immich-redis
+    env_file:
+      - stack.env
     volumes:
       - type: bind
         source: /DATA/AppData/immich/model-cache
@@ -67,6 +71,8 @@ services:
     image: docker.io/valkey/valkey:8-bookworm@sha256:ff21bc0f8194dc9c105b769aeabf9585fea6a8ed649c0781caeac5cb3c247884
     restart: unless-stopped
     hostname: immich-redis
+    env_file:
+      - stack.env
     networks:
       - immich-network
     healthcheck:
@@ -80,10 +86,12 @@ services:
     networks:
       - immich-network
     environment:
-      POSTGRES_PASSWORD: casfdsifosjdiioshf
-      POSTGRES_USER: immich
       POSTGRES_DB: immich
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_INITDB_ARGS: "--data-checksums"
+    env_file:
+      - stack.env
     volumes:
       - type: bind
         source: /DATA/AppData/immich/pgdata
