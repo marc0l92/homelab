@@ -36,9 +36,15 @@ services:
       - type: bind
         source: /media
         target: /media
+        bind:
+          propagation: shared
+          recursive: enabled
       - type: bind
         source: /mnt
         target: /mnt
+        bind:
+          propagation: shared
+          recursive: enabled
     # devices:
       # - /dev/dri:/dev/dri
       # - /dev/vcsm:/dev/vcsm
