@@ -49,7 +49,7 @@ services:
       TZ: Etc/UTC
     volumes:
       - /DATA/AppData/servarr/qbittorrent:/config
-      - ${DOWNLOAD_FOLDER}:/downloads
+      - ${DOWNLOAD_FOLDER}/qbittorrent:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
@@ -88,7 +88,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/nzbget:/config
-      - ${DOWNLOAD_FOLDER}:/downloads
+      - ${DOWNLOAD_FOLDER}/nzbget:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
@@ -169,8 +169,8 @@ services:
         ipv4_address: 172.39.0.5
 
   bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
+    image: lscr.io/linuxserver/bazarr:latest
     restart: unless-stopped
     hostname: bazarr
     environment:
@@ -186,6 +186,42 @@ services:
     networks:
       servarrnetwork:
         ipv4_address: 172.39.0.6
+
+  mylar:
+    container_name: mylar
+    image: lscr.io/linuxserver/mylar3:latest
+    restart: unless-stopped
+    hostname: mylar
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - ${DATA_FOLDER}:/data
+      - /DATA/AppData/servarr/mylar:/config
+    ports:
+      - 8090:8090
+    networks:
+      servarrnetwork:
+        ipv4_address: 172.39.0.7
+
+  readarr:
+    container_name: readarr
+    image: lscr.io/linuxserver/readarr:latest
+    restart: unless-stopped
+    hostname: readarr
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - ${DATA_FOLDER}:/data
+      - /DATA/AppData/servarr/mylar:/config
+    ports:
+      - 8787:8787
+    networks:
+      servarrnetwork:
+        ipv4_address: 172.39.0.8
 
 networks:
   servarrnetwork:
