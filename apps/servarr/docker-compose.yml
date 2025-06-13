@@ -205,23 +205,23 @@ services:
       servarrnetwork:
         ipv4_address: 172.39.0.7
 
-  # readarr:
-  #   container_name: readarr
-  #   image: lscr.io/linuxserver/readarr:latest
-  #   restart: unless-stopped
-  #   hostname: readarr
-  #   environment:
-  #     PGID: "1000"
-  #     PUID: "1000"
-  #     TZ: Etc/UTC
-  #   volumes:
-  #     - ${DATA_FOLDER}:/data
-  #     - /DATA/AppData/servarr/mylar:/config
-  #   ports:
-  #     - 8787:8787
-  #   networks:
-  #     servarrnetwork:
-  #       ipv4_address: 172.39.0.8
+  readarr:
+    container_name: readarr
+    image: lscr.io/linuxserver/readarr:develop
+    restart: unless-stopped
+    hostname: readarr
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - ${DATA_FOLDER}:/data
+      - /DATA/AppData/servarr/mylar:/config
+    ports:
+      - 8787:8787
+    networks:
+      servarrnetwork:
+        ipv4_address: 172.39.0.8
 
 networks:
   servarrnetwork:
