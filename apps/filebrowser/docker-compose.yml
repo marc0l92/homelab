@@ -10,11 +10,11 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-      FB_BASEURL: /
+      FB_BASEURL: /DATA
     ports:
       - 3333:8080
     volumes:
       - /DATA/AppData/filebrowser/config:/config
-      - /DATA:/DATA
-      - /media:/media
-      - /mnt:/mnt
+      - /DATA:/DATA:rslave
+      - /media:/media:rslave
+      - /mnt:/mnt:rslave
