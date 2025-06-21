@@ -15,8 +15,8 @@ services:
       AFP_CONFIG_POLLING: 5
       # MANUAL_CONFIG: 1 # Uncomment to setup with webmin
       SERVER_NAME: minipc
-      PGID: "1000"
-      PUID: "1000"
+      # PGID: "1000"
+      # PUID: "1000"
       TZ: Etc/UTC
     ports:
       - 548:548
