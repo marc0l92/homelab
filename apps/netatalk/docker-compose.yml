@@ -1,0 +1,55 @@
+name: netatalk
+services:
+  netatalk:
+    container_name: netatalk
+    image: netatalk:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: netatalk
+    environment:
+      AFP_USER: ${AFP_USER}
+      AFP_PASS: ${AFP_PASS}
+      AFP_GROUP: ${AFP_GROUP}
+      AFP_CONFIG_POLLING: 5
+      MANUAL_CONFIG: 1
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 548
+        published: "548"
+        protocol: tcp
+    volumes:
+      - /DATA/AppData/netatalk/share:/mnt/afpshare
+      - /DATA/AppData/netatalk/backup:/mnt/afpbackup
+      - /DATA/AppData/netatalk/conf:/etc/netatalk
+      - /var/run/dbus:/var/run/dbus
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
+    env_file:
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
+
+  webmin:
+    container_name: netatalk_webmin
+    image: netatalk_webmin_module:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: netatalk_webmin
+    ports:
+      - "10000:10000"
+    volumes:
+      - /DATA/AppData/netatalk/conf:/etc/netatalk
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WEBMIN_USER: ${WEBMIN_USER}
+      WEBMIN_PASS: ${WEBMIN_PASS}
+    depends_on:
+      - netatalk
+    env_file:
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
