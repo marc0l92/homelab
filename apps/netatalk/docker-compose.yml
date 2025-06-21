@@ -11,7 +11,7 @@ services:
       AFP_USER: ${AFP_USER}
       AFP_PASS: ${AFP_PASS}
       AFP_GROUP: ${AFP_GROUP}
-      ATALKD_INTERFACE: ethenp1s0
+      ATALKD_INTERFACE: enp1s0
       AFP_CONFIG_POLLING: 5
       MANUAL_CONFIG: 1
       SERVER_NAME: minipc
