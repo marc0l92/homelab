@@ -16,6 +16,7 @@ services:
     volumes:
       - /DATA/AppData/headscale/data:/var/lib/headscale
       - /DATA/AppData/headscale/config:/etc/headscale
+      - /DATA/AppData/headscale/run:/var/run/headscale
 
   # headplane:
   #   container_name: headplane
