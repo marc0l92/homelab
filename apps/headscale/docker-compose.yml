@@ -1,0 +1,31 @@
+name: headscale
+services:
+  headplane:
+    container_name: headplane
+    image: ghcr.io/tale/headplane:0.6.0
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: headplane
+    ports:
+      - 3055:3000
+    volumes:
+      - /DATA/AppData/headplane/config:/etc/headplane
+      - /DATA/AppData/headplane/data:/var/lib/headplane
+      - /DATA/AppData/headscale/config:/etc/headscale
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  headscale:
+    container_name: headscale
+    image: headscale/headscale:0.26.0
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: headscale
+    command: serve
+    labels:
+      # This is needed for Headplane to find it and signal it
+      me.tale.headplane.target: headscale
+    ports:
+      - 8055:8080
+    volumes:
+      - /DATA/AppData/headscale/data:/var/lib/headscale
+      - /DATA/AppData/headscale/config:/etc/headscale
