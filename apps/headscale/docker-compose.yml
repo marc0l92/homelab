@@ -10,6 +10,10 @@ services:
     labels:
       # This is needed for Headplane to find it and signal it
       me.tale.headplane.target: headscale
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     ports:
       - 8055:8080
       # - 9055:9090 # Metrics service
@@ -24,6 +28,10 @@ services:
   #   network_mode: bridge
   #   restart: unless-stopped
   #   hostname: headplane
+  #.  environment:
+  #     PGID: "1000"
+  #     PUID: "1000"
+  #.    TZ: Etc/UTC
   #   ports:
   #     - 3055:3000
   #   volumes:
@@ -38,6 +46,10 @@ services:
     network_mode: bridge
     restart: unless-stopped
     hostname: headscale-ui
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     ports:
     - 5443:8443
     - 5080:8080
