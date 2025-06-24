@@ -8,6 +8,7 @@ services:
     hostname: tailscale
     environment:
       TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_HOSTNAME: minipc
       # TS_EXTRA_ARGS: --advertise-tags=tag:container
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: false
