@@ -9,7 +9,7 @@ services:
     environment:
       TS_AUTHKEY: ${TS_AUTHKEY}
       TS_HOSTNAME: minipc
-      # TS_EXTRA_ARGS: --advertise-tags=tag:container
+      TS_EXTRA_ARGS: --advertise-routes=192.168.1.0/24
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: false
       PGID: "1000"
