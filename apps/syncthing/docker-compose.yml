@@ -42,6 +42,9 @@ services:
       - type: bind
         source: /mnt
         target: /mnt
+        bind:
+          propagation: slave
+          recursive: enabled
     cap_add:
       - AUDIT_WRITE
       - CHOWN
@@ -97,6 +100,9 @@ services:
       - type: bind
         source: /mnt
         target: /mnt
+        bind:
+          propagation: slave
+          recursive: enabled
     cap_add:
       - AUDIT_WRITE
       - CHOWN
