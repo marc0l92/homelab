@@ -17,4 +17,4 @@ services:
       - /DATA/AppData/homepage/config:/app/config
       - /DATA/AppData/homepage/icons:/app/public/icons
       - /DATA/AppData/homepage/images:/app/public/images
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
