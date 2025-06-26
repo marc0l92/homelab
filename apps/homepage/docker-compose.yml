@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     hostname: homepage
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: 192.168.1.201:3000,homepage.local
+      HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.local
     ports:
       - target: 3000
         published: "3000"

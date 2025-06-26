@@ -8,7 +8,7 @@ services:
     hostname: wg-easy
     environment:
       PASSWORD_HASH: $$2a$$12$$y0MLjQ9cOBNtCyq5.RMlju3XCFpBEr9KuC.Y9fqie5UYMrTPHuiCu
-      WG_DEFAULT_DNS: 192.168.1.201
+      WG_DEFAULT_DNS: 192.168.5.201
       WG_HOST: lucarotto.duckdns.org
       WG_PORT: "51820"
     ports:

@@ -11,7 +11,7 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     command:
-      - '"/usr/local/bin/microsocks" -b 192.168.1.201 -p 1080'
+      - '"/usr/local/bin/microsocks" -b 192.168.5.201 -p 1080'
     ports:
       - target: 1080
         published: "8889"
