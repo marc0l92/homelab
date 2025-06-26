@@ -9,7 +9,7 @@ services:
     environment:
       HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.local,homepage.lucarotto-local.duckdns.org,homepage.lucarotto.duckdns.org
       PGID: "1000"
-      PUID: "1000"
+      PUID: "119" # Docker group ID
       TZ: Etc/UTC
     ports:
       - 3000:3000/tcp
