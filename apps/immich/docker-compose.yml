@@ -33,9 +33,9 @@ services:
     ports:
       - 2283:2283/tcp
     volumes:
-      - /mnt/data/Gallery/immich/usr/src/app/upload
-      - /mnt/data/Gallery/kDrive/usr/src/app/libraries
-      - /etc/localtime/etc/localtime:ro
+      - /mnt/data/Gallery/immich:/usr/src/app/upload
+      - /mnt/data/Gallery/kDrive:/usr/src/app/libraries
+      - /etc/localtime:/etc/localtime:ro
     healthcheck:
       disable: false
 
@@ -62,7 +62,7 @@ services:
       - path: ../../stack.env
         required: false
     volumes:
-      - /DATA/AppData/immich/model-cache/cache
+      - /DATA/AppData/immich/model-cache:/cache
     healthcheck:
       disable: false
 
@@ -106,7 +106,7 @@ services:
       - path: ../../stack.env
         required: false
     volumes:
-      - /DATA/AppData/immich/pgdata/var/lib/postgresql/data
+      - /DATA/AppData/immich/pgdata:/var/lib/postgresql/data
 
 networks:
   immich-network:
