@@ -9,12 +9,14 @@ services:
     environment:
       TS_AUTHKEY: ${TS_AUTHKEY}
       TS_HOSTNAME: minipc
-      TS_EXTRA_ARGS: --advertise-routes=192.168.1.0/24 --advertise-exit-node
+      TS_EXTRA_ARGS: --advertise-routes=192.168.5.0/24 --advertise-exit-node --webclient
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: false
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
+    ports:
+      - 5252:5252/tcp
     volumes:
       - /DATA/AppData/tailscale/state:/var/lib/tailscale
     devices:
