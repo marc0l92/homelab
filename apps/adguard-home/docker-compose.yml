@@ -18,18 +18,15 @@ services:
       TZ: Etc/UTC
     ports:
       # DNS
-      - 53:53/tcp
-      - 53:53/udp
+      - 53:53
 
       # DHCP
       # - 67:68/udp
-      # - 68:68/tcp
-      # - 68:68/udp
+      # - 68:68
 
       # Admin Panel
-      - 80:3002/tcp
-      - 443:3003/tcp
-      - 443:3003/udp
+      - 3002:80/tcp
+      - 3003:443
 
       # DNS Over TLS
       - 853:853/tcp

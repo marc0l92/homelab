@@ -11,7 +11,7 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 80:1080/tcp
+      - 1080:80/tcp
     volumes:
       - /mnt/data/Media/Audiobooks:/audiobooks
       - /mnt/data/Media/Podcasts:/podcasts

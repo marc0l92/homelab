@@ -20,10 +20,9 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 22000:22001/udp
-      - 8384:8385/tcp
-      - 21027:21028/udp
-      - 22000:22001/tcp
+      - 8385:8384/tcp
+      - 22001:22000
+      - 21028:21027/udp
     volumes:
       - /DATA/AppData/syncthing-local/config:/config
       - /DATA:/DATA
@@ -64,10 +63,9 @@ services:
       PGID: "1000"
       TZ: Etc/UTC
     ports:
-      - 21027:21027/udp
-      - 22000:22000/tcp
-      - 22000:22000/udp
       - 8384:8384/tcp
+      - 22000:22000
+      - 21027:21027/udp
     volumes:
       - /DATA/AppData/syncthing-remote/config:/config
       - /mnt:/mnt:rslave

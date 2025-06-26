@@ -13,7 +13,7 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 8000:8001/tcp
+      - 8001:8000/tcp
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/cup:/config
