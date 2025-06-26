@@ -20,31 +20,14 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 22000
-        published: "22001"
-        protocol: udp
-      - target: 8384
-        published: "8385"
-        protocol: tcp
-      - target: 21027
-        published: "21028"
-        protocol: udp
-      - target: 22000
-        published: "22001"
-        protocol: tcp
+      - 22000:22001/udp
+      - 8384:8385/tcp
+      - 21027:21028/udp
+      - 22000:22001/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/syncthing-local/config
-        target: /config
-      - type: bind
-        source: /DATA
-        target: /DATA
-      - type: bind
-        source: /mnt
-        target: /mnt
-        bind:
-          propagation: slave
-          recursive: enabled
+      - /DATA/AppData/syncthing-local/config:/config
+      - /DATA:/DATA
+      - /mnt:/mnt:rslave
     cap_add:
       - AUDIT_WRITE
       - CHOWN
@@ -81,28 +64,13 @@ services:
       PGID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 21027
-        published: "21027"
-        protocol: udp
-      - target: 22000
-        published: "22000"
-        protocol: tcp
-      - target: 22000
-        published: "22000"
-        protocol: udp
-      - target: 8384
-        published: "8384"
-        protocol: tcp
+      - 21027:21027/udp
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 8384:8384/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/syncthing-remote/config
-        target: /config
-      - type: bind
-        source: /mnt
-        target: /mnt
-        bind:
-          propagation: slave
-          recursive: enabled
+      - /DATA/AppData/syncthing-remote/config:/config
+      - /mnt:/mnt:rslave
     cap_add:
       - AUDIT_WRITE
       - CHOWN

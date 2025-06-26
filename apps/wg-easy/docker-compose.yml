@@ -11,17 +11,14 @@ services:
       WG_DEFAULT_DNS: 192.168.5.201
       WG_HOST: lucarotto.duckdns.org
       WG_PORT: "51820"
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     ports:
-      - target: 51820
-        published: "51820"
-        protocol: udp
-      - target: 51821
-        published: "51821"
-        protocol: tcp
+      - 51820:51820/udp
+      - 51821:51821/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/wg-easy/wireguard
-        target: /etc/wireguard
+      - /DATA/AppData/wg-easy/wireguard/etc/wireguard
     cap_add:
       - NET_ADMIN
       - SYS_MODULE

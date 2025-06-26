@@ -12,16 +12,8 @@ services:
       DEFAULT_WORKSPACE: /DATA/AppData
       TZ: Etc/UTC
     ports:
-      - target: 8443
-        published: "8087"
-        protocol: tcp
+      - 8443:8087/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/code-server/config
-        target: /config
-      - type: bind
-        source: /DATA/AppData/code-server/projects
-        target: /projects
-      - type: bind
-        source: /DATA
-        target: /DATA
+      - /DATA/AppData/code-server/config:/config
+      - /DATA/AppData/code-server/projects:/projects
+      - /DATA:/DATA

@@ -18,22 +18,12 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 8999
-        published: "8999"
-        protocol: tcp
-      - target: 8999
-        published: "8999"
-        protocol: udp
-      - target: 8080
-        published: "8082"
-        protocol: tcp
+      - 8999:8999/tcp
+      - 8999:8999/udp
+      - 8080:8082/tcp
     volumes:
-      - type: bind
-        source: /DATA/Downloads/qbittorrent
-        target: /downloads
-      - type: bind
-        source: /DATA/AppData/qbittorrent-wireguard/config
-        target: /config
+      - /DATA/Downloads/qbittorrent:/downloads
+      - /DATA/AppData/qbittorrent-wireguard/config:/config
     cap_add:
       - NET_ADMIN
     sysctls:

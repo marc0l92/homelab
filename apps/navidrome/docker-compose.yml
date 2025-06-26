@@ -15,13 +15,7 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 4533
-        published: "4533"
-        protocol: tcp
+      - 4533:4533/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/navidrome/data
-        target: /data
-      - type: bind
-        source: /DATA/Media/Music
-        target: /music
+      - /DATA/AppData/navidrome/data:/data
+      - /DATA/Media/Music:/music

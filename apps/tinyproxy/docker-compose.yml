@@ -11,10 +11,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 8888
-        published: "8888"
-        protocol: tcp
+      - 8888:8888/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/tinyproxy
-        target: /etc/tinyproxy
+      - /DATA/AppData/tinyproxy:/etc/tinyproxy

@@ -12,10 +12,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 4567
-        published: "4567"
-        protocol: tcp
+      - 4567:4567/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/suwayomi
-        target: /home/suwayomi/.local/share/Tachidesk
+      - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk

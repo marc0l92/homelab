@@ -22,6 +22,9 @@ services:
       DB_PORT: "5432"
       IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
       REDIS_HOSTNAME: immich-redis
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     env_file:
       - path: .env
         required: true
@@ -33,16 +36,9 @@ services:
         published: "2283"
         protocol: tcp
     volumes:
-      - type: bind
-        source: /mnt/data/Gallery/immich
-        target: /usr/src/app/upload
-      - type: bind
-        source: /mnt/data/Gallery/kDrive
-        target: /usr/src/app/libraries
-      - type: bind
-        source: /etc/localtime
-        target: /etc/localtime
-        read_only: true
+      - /mnt/data/Gallery/immich/usr/src/app/upload
+      - /mnt/data/Gallery/kDrive/usr/src/app/libraries
+      - /etc/localtime/etc/localtime:ro
     healthcheck:
       disable: false
 
@@ -60,15 +56,16 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: "5432"
       REDIS_HOSTNAME: immich-redis
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     env_file:
       - path: .env
         required: true
       - path: ../../stack.env
         required: false
     volumes:
-      - type: bind
-        source: /DATA/AppData/immich/model-cache
-        target: /cache
+      - /DATA/AppData/immich/model-cache/cache
     healthcheck:
       disable: false
 
@@ -77,6 +74,10 @@ services:
     image: docker.io/valkey/valkey:8-bookworm@sha256:ff21bc0f8194dc9c105b769aeabf9585fea6a8ed649c0781caeac5cb3c247884
     restart: unless-stopped
     hostname: immich-redis
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     env_file:
       - path: .env
         required: true
@@ -99,15 +100,16 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_INITDB_ARGS: "--data-checksums"
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
     env_file:
       - path: .env
         required: true
       - path: ../../stack.env
         required: false
     volumes:
-      - type: bind
-        source: /DATA/AppData/immich/pgdata
-        target: /var/lib/postgresql/data
+      - /DATA/AppData/immich/pgdata/var/lib/postgresql/data
 
 networks:
   immich-network:

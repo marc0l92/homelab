@@ -7,10 +7,10 @@ services:
     restart: unless-stopped
     hostname: jellyfin
     environment:
+      FB_BASEURL: /DATA
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-      FB_BASEURL: /DATA
     ports:
       - 3333:8080
     volumes:
