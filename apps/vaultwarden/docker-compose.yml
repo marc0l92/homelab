@@ -1,0 +1,17 @@
+name: vaultwarden
+services:
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: vaultwarden
+    environment:
+      DOMAIN: https://vaultwarden.lucarotto-local.duckdns.org
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - /DATA/AppData/vaultwarden:/data
+    ports:
+      - 8022:80
