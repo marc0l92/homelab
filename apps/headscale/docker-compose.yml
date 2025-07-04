@@ -32,9 +32,11 @@ services:
   #     - /var/run/docker.sock:/var/run/docker.sock:ro
 
   headscale-ui:
-    image: ghcr.io/gurucomputing/headscale-ui:latest
-    restart: unless-stopped
     container_name: headscale-ui
+    image: ghcr.io/gurucomputing/headscale-ui:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: headscale-ui
     ports:
     - 5443:8443
     - 5080:8080
