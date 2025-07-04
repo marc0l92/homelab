@@ -13,8 +13,8 @@ services:
       - -w
       - /opt/adguardhome/work
     environment:
-      PGID: "1000"
-      PUID: "1000"
+      # PGID: "1000"
+      # PUID: "1000"
       TZ: Etc/UTC
     ports:
       # DNS
