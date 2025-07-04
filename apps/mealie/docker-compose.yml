@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     hostname: mealie
     ports:
-      - 9000:9925/tcp
+      - 9925:9000/tcp
     environment:
       ALLOW_SIGNUP: "true"
       BASE_URL: https://mealie.lucarotto.duckdns.org

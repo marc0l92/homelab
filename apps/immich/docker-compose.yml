@@ -31,10 +31,7 @@ services:
       - path: ../../stack.env
         required: false
     ports:
-      - mode: ingress
-        target: 2283
-        published: "2283"
-        protocol: tcp
+      - 2283:2283/tcp
     volumes:
       - /mnt/data/Gallery/immich/usr/src/app/upload
       - /mnt/data/Gallery/kDrive/usr/src/app/libraries

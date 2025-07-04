@@ -16,6 +16,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 80:7745/tcp
+      - 7745:80/tcp
     volumes:
       - /DATA/AppData/telegram-files:/app/data

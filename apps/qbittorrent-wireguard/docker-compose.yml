@@ -20,7 +20,7 @@ services:
     ports:
       - 8999:8999/tcp
       - 8999:8999/udp
-      - 8080:8082/tcp
+      - 8082:8080/tcp
     volumes:
       - /DATA/Downloads/qbittorrent:/downloads
       - /DATA/AppData/qbittorrent-wireguard/config:/config

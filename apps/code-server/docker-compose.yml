@@ -12,7 +12,7 @@ services:
       DEFAULT_WORKSPACE: /DATA/AppData
       TZ: Etc/UTC
     ports:
-      - 8443:8087/tcp
+      - 8087:8443/tcp
     volumes:
       - /DATA/AppData/code-server/config:/config
       - /DATA/AppData/code-server/projects:/projects
