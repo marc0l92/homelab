@@ -1,0 +1,111 @@
+name: syncthing
+services:
+  syncthing-local:
+    container_name: syncthing-local
+    image: linuxserver/syncthing:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: syncthing-local
+    environment:
+      HOME: /config
+      LSIO_FIRST_PARTY: "true"
+      PATH: /lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      PS1: $$$$$$$$(whoami)@$$$$$$$$(hostname):$$$$$$$$(pwd)\$$$$$$$$
+      S6_CMD_WAIT_FOR_SERVICES_MAXTIME: "0"
+      S6_STAGE2_HOOK: /docker-mods
+      S6_VERBOSITY: "1"
+      TERM: xterm
+      VIRTUAL_ENV: /lsiopy
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 22000
+        published: "22001"
+        protocol: udp
+      - target: 8384
+        published: "8385"
+        protocol: tcp
+      - target: 21027
+        published: "21028"
+        protocol: udp
+      - target: 22000
+        published: "22001"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA
+        target: /DATA
+      - type: bind
+        source: /DATA/AppData/syncthing-local/config
+        target: /config
+    cap_add:
+      - AUDIT_WRITE
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - FSETID
+      - KILL
+      - MKNOD
+      - NET_BIND_SERVICE
+      - NET_RAW
+      - SETFCAP
+      - SETGID
+      - SETPCAP
+      - SETUID
+      - SYS_CHROOT
+
+  syncthing-remote:
+    container_name: syncthing-remote
+    image: linuxserver/syncthing:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: syncthing-remote
+    environment:
+      HOME: /config
+      LSIO_FIRST_PARTY: "true"
+      PATH: /lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      PS1: $$$$(whoami)@$$$$(hostname):$$$$(pwd)\$$$$
+      S6_CMD_WAIT_FOR_SERVICES_MAXTIME: "0"
+      S6_STAGE2_HOOK: /docker-mods
+      S6_VERBOSITY: "1"
+      TERM: xterm
+      VIRTUAL_ENV: /lsiopy
+      PUID: "1000"
+      PGID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 21027
+        published: "21027"
+        protocol: udp
+      - target: 22000
+        published: "22000"
+        protocol: tcp
+      - target: 22000
+        published: "22000"
+        protocol: udp
+      - target: 8384
+        published: "8384"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /mnt
+        target: /mnt
+      - type: bind
+        source: /DATA/AppData/syncthing-remote/config
+        target: /config
+    cap_add:
+      - AUDIT_WRITE
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - FSETID
+      - KILL
+      - MKNOD
+      - NET_BIND_SERVICE
+      - NET_RAW
+      - SETFCAP
+      - SETGID
+      - SETPCAP
+      - SETUID
+      - SYS_CHROOT
