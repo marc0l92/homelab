@@ -1,0 +1,25 @@
+name: cup
+services:
+  cup:
+    container_name: cup
+    image: ghcr.io/sergi0g/cup:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: cup
+    command:
+      - serve
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 8000
+        published: "8001"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: /DATA/AppData/cup
+        target: /config
