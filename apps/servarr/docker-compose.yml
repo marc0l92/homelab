@@ -123,7 +123,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/sonarr:/config
-      - ${DATA_FOLDER}:/data
+      - ${DATA_FOLDER}:/data/media
+      - ${DOWNLOAD_FOLDER}:/data/download
     ports:
       - 8989:8989
     networks:
@@ -142,7 +143,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/radarr:/config
-      - ${DATA_FOLDER}:/data
+      - ${DATA_FOLDER}:/data/media
+      - ${DOWNLOAD_FOLDER}:/data/download
     ports:
       - 7878:7878
     networks:
@@ -157,7 +159,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/lidarr:/config
-      - ${DATA_FOLDER}:/data
+      - ${DATA_FOLDER}:/data/media
+      - ${DOWNLOAD_FOLDER}:/data/download
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -180,7 +183,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/bazarr:/config
-      - ${DATA_FOLDER}:/data
+      - ${DATA_FOLDER}:/data/media
+      - ${DOWNLOAD_FOLDER}:/data/download
     ports:
       - 6767:6767
     networks:
@@ -197,8 +201,10 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     volumes:
-      - ${DATA_FOLDER}:/data
+      - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
+      - ${DATA_FOLDER}:/data/media
+      - ${DOWNLOAD_FOLDER}:/data/download
     ports:
       - 8090:8090
     networks:
@@ -215,8 +221,10 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     volumes:
-      - ${DATA_FOLDER}:/data
+      - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
+      - ${DATA_FOLDER}:/data/media
+      - ${DOWNLOAD_FOLDER}:/data/download
     ports:
       - 8787:8787
     networks:
