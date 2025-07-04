@@ -16,8 +16,8 @@ services:
       S6_VERBOSITY: "1"
       TERM: xterm
       VIRTUAL_ENV: /lsiopy
-      PGID: "1000"
-      PUID: "1000"
+      # PGID: "1000"
+      # PUID: "1000"
       TZ: Etc/UTC
     ports:
       - 8385:8384/tcp
