@@ -8,6 +8,7 @@ services:
     hostname: vaultwarden
     environment:
       DOMAIN: https://vaultwarden.lucarotto-local.duckdns.org
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
@@ -15,3 +16,8 @@ services:
       - /DATA/AppData/vaultwarden:/data
     ports:
       - 8022:80
+    env_file:
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
