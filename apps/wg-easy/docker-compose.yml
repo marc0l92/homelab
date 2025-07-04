@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     hostname: wg-easy
     environment:
-      PASSWORD_HASH: $$2a$$12$$y0MLjQ9cOBNtCyq5.RMlju3XCFpBEr9KuC.Y9fqie5UYMrTPHuiCu
+      PASSWORD_HASH: ${PASSWORD_HASH}
       WG_DEFAULT_DNS: 192.168.5.201
       WG_HOST: lucarotto.duckdns.org
       WG_PORT: "51820"
@@ -25,3 +25,8 @@ services:
     sysctls:
       net.ipv4.conf.all.src_valid_mark: "1"
       net.ipv4.ip_forward: "1"
+    env_file:
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
