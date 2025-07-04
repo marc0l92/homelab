@@ -3,17 +3,18 @@ services:
   netatalk:
     container_name: netatalk
     image: netatalk/netatalk:latest
-    network_mode: bridge
+    # network_mode: bridge
+    network_mode: host
     restart: unless-stopped
     hostname: netatalk
     environment:
       AFP_USER: ${AFP_USER}
       AFP_PASS: ${AFP_PASS}
       AFP_GROUP: ${AFP_GROUP}
+      ATALKD_INTERFACE: ethenp1s0
       AFP_CONFIG_POLLING: 5
       MANUAL_CONFIG: 1
       SERVER_NAME: minipc
-      SHARE_NAME: minipc-afp
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
@@ -34,24 +35,24 @@ services:
       - path: ../../stack.env
         required: false
 
-  webmin:
-    container_name: netatalk_webmin
-    image: netatalk/webmin:latest
-    network_mode: bridge
-    restart: unless-stopped
-    hostname: netatalk_webmin
-    ports:
-      - 10000:10000
-    volumes:
-      - /DATA/AppData/netatalk/conf:/etc/netatalk
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      WEBMIN_USER: ${WEBMIN_USER}
-      WEBMIN_PASS: ${WEBMIN_PASS}
-    depends_on:
-      - netatalk
-    env_file:
-      - path: .env
-        required: true
-      - path: ../../stack.env
-        required: false
+  # webmin:
+  #   container_name: netatalk_webmin
+  #   image: netatalk/webmin:latest
+  #   network_mode: bridge
+  #   restart: unless-stopped
+  #   hostname: netatalk_webmin
+  #   ports:
+  #     - 10000:10000
+  #   volumes:
+  #     - /DATA/AppData/netatalk/conf:/etc/netatalk
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   environment:
+  #     WEBMIN_USER: ${WEBMIN_USER}
+  #     WEBMIN_PASS: ${WEBMIN_PASS}
+  #   depends_on:
+  #     - netatalk
+  #   env_file:
+  #     - path: .env
+  #       required: true
+  #     - path: ../../stack.env
+  #       required: false
