@@ -1,0 +1,20 @@
+name: metube
+services:
+  metube:
+    container_name: metube
+    image: ghcr.io/alexta69/metube:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: metube
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 8081
+        published: "8081"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/Downloads/metube
+        target: /downloads

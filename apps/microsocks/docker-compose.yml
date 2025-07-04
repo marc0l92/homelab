@@ -1,0 +1,18 @@
+name: microsocks
+services:
+  microsocks:
+    container_name: microsocks
+    image: ghcr.io/httptoolkit/docker-socks-tunnel:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: microsocks
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    command:
+      - '"/usr/local/bin/microsocks" -b 192.168.1.201 -p 1080'
+    ports:
+      - target: 1080
+        published: "8889"
+        protocol: tcp
