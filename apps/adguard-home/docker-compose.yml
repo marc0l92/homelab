@@ -1,0 +1,104 @@
+name: adguard-home
+services:
+    adguard-home:
+        cpu_shares: 90
+        command:
+            - --no-check-update
+            - -c
+            - /opt/adguardhome/conf/AdGuardHome.yaml
+            - -w
+            - /opt/adguardhome/work
+        environment:
+            OPENAI_API_KEY: sk-xxxxxx
+            PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        image: adguard/adguardhome:latest
+        labels:
+            icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/AdGuardHome/icon.png
+        network_mode: bridge
+        ports:
+            - target: 80
+              published: "3002"
+              protocol: tcp
+            - target: 853
+              published: "853"
+              protocol: tcp
+            - target: 3000
+              published: "3001"
+              protocol: tcp
+            - target: 53
+              published: "53"
+              protocol: tcp
+            - target: 53
+              published: "53"
+              protocol: udp
+            - target: 784
+              published: "784"
+              protocol: udp
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /DATA/AppData/adguard-home/opt/adguardhome/conf
+              target: /opt/adguardhome/conf
+            - type: bind
+              source: /DATA/AppData/adguard-home/opt/adguardhome/work
+              target: /opt/adguardhome/work
+        x-casaos:
+            envs:
+                - container: OPENAI_API_KEY
+                  description:
+                    en_us: ""
+                - container: PATH
+                  description:
+                    en_us: ""
+            image: ""
+            ports:
+                - container: "80"
+                  description:
+                    en_us: ""
+                - container: "853"
+                  description:
+                    en_us: ""
+                - container: "3000"
+                  description:
+                    en_us: ""
+                - container: "53"
+                  description:
+                    en_us: ""
+                - container: "53"
+                  description:
+                    en_us: ""
+                - container: "784"
+                  description:
+                    en_us: ""
+            volumes:
+                - container: /opt/adguardhome/conf
+                  description:
+                    en_us: ""
+                - container: /opt/adguardhome/work
+                  description:
+                    en_us: ""
+networks:
+    default:
+        name: adguard-home_default
+x-casaos:
+    architectures:
+        - amd64
+    author: CasaOS User
+    category: unknown
+    description:
+        en_us: ""
+    developer: unknown
+    icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/AdGuardHome/icon.png
+    image: null
+    is_uncontrolled: false
+    main: adguard-home
+    port_map: "3001"
+    scheme: http
+    store_app_id: adguard-home
+    tagline:
+        en_us: This is a compose app converted from a legacy app (CasaOS v0.4.3 or earlier)
+    thumbnail: ""
+    tips:
+        custom: This is a compose app converted from a legacy app (CasaOS v0.4.3 or earlier)
+    title:
+        en_us: adguard-home
