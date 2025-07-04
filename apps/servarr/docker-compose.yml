@@ -56,7 +56,7 @@ services:
       TZ: Etc/UTC
     volumes:
       - /DATA/AppData/servarr/qbittorrent:/config
-      - ${DOWNLOAD_FOLDER}/qbittorrent:/downloads
+      - ${DOWNLOAD_FOLDER}:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
@@ -95,7 +95,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/nzbget:/config
-      - ${DOWNLOAD_FOLDER}/nzbget:/downloads
+      - ${DOWNLOAD_FOLDER}:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
@@ -148,7 +148,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/radarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/data/download
+      - ${DOWNLOAD_FOLDER}:/download
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -169,7 +169,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/sonarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/data/download
+      - ${DOWNLOAD_FOLDER}:/download
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -191,7 +191,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/lidarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/data/download
+      - ${DOWNLOAD_FOLDER}:/download
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -212,7 +212,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/bazarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/data/download
+      - ${DOWNLOAD_FOLDER}:/download
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -233,7 +233,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/data/download
+      - ${DOWNLOAD_FOLDER}:/download
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -254,7 +254,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/data/download
+      - ${DOWNLOAD_FOLDER}:/download
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
