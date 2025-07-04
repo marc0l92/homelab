@@ -1,0 +1,20 @@
+name: memos
+services:
+  memos:
+    container_name: memos
+    image: neosmemo/memos:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: memos
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 5230
+        published: "5230"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/memos/memos
+        target: /var/opt/memos
