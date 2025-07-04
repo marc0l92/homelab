@@ -15,7 +15,7 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 8083:8080 # qbittorrent web interface
+      - 8083:8083 # qbittorrent web interface
       # - 6881:6881 # qbittorrent torrent port
       - 6789:6789 # nzbget
       - 9696:9696 # prowlarr
@@ -42,14 +42,14 @@ services:
     labels:
       - deunhealth.restart.on.unhealthy=true
     environment:
-      WEBUI_PORT: 8080 # must match "qbittorrent web interface" port number in gluetun's service above
+      WEBUI_PORT: 8083 # must match "qbittorrent web interface" port number in gluetun's service above
       # TORRENTING_PORT: ${FIREWALL_VPN_INPUT_PORTS} # airvpn forwarded port, pulled from stack.env
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
     volumes:
       - /DATA/AppData/servarr/qbittorrent:/config
-      - ${DATA_FOLDER}:/data
+      - ${DOWNLOAD_FOLDER}:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
@@ -88,7 +88,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/nzbget:/config
-      - ${DOWNLOAD_FOLDER}/nzbget:/downloads
+      - ${DOWNLOAD_FOLDER}:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
