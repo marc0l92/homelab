@@ -54,7 +54,7 @@ services:
       DB_USERNAME: immich
       REDIS_HOSTNAME: immich-redis
     volumes:
-      - type: volume
+      - type: bind
         source: /DATA/AppData/immich/model-cache
         target: model-cache
     healthcheck:
@@ -79,11 +79,8 @@ services:
       POSTGRES_PASSWORD: casfdsifosjdiioshf
       POSTGRES_USER: immich
       POSTGRES_DB: immich
-      POSTGRES_INITDB_ARGS: '--data-checksums'
+      POSTGRES_INITDB_ARGS: "--data-checksums"
     volumes:
       - type: bind
         source: /DATA/AppData/immich/pgdata
         target: /var/lib/postgresql/data
-
-volumes:
-  model-cache:
