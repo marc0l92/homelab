@@ -1,0 +1,20 @@
+name: clipcascade
+services:
+  clipcascade:
+    container_name: clipcascade
+    image: sathvikrao/clipcascade:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: clipcascade
+    environment:
+      CC_MAX_MESSAGE_SIZE_IN_MiB: 5   # Maximum message size in MiB (ignored if P2P mode is enabled)
+      CC_P2P_ENABLED: false  # Enables or disables peer-to-peer(P2P) mode
+      # CC_ALLOWED_ORIGINS: https://clipcascade.example.com  # Defines allowed CORS origins for security
+      CC_SIGNUP_ENABLED: true  # Enables or disables user self-registration
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - 8550:8080
+    volumes:
+      - /DATA/AppData/clipcascade:/database
