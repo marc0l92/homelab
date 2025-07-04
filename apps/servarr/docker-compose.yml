@@ -111,6 +111,23 @@ services:
         condition: service_healthy
         restart: true
 
+  flaresolverr:
+    container_name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    restart: unless-stopped
+    network_mode: service:gluetun
+    environment:
+      LOG_LEVEL: info
+      LOG_HTML: false
+      CAPTCHA_SOLVER: none
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+
   sonarr:
     container_name: sonarr
     image: lscr.io/linuxserver/sonarr:latest
