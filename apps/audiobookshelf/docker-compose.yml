@@ -1,0 +1,25 @@
+name: audiobookshelf
+services:
+  audiobookshelf:
+    container_name: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: audiobookshelf
+    ports:
+      - target: 80
+        published: "1080"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /mnt/data/Media/Audiobooks
+        target: /audiobooks
+      - type: bind
+        source: /mnt/data/Media/Podcasts
+        target: /podcasts
+      - type: bind
+        source: /DATA/AppData/audiobookshelf/data/config
+        target: /config
+      - type: bind
+        source: /DATA/AppData/audiobookshelf/data/metadata
+        target: /metadata
