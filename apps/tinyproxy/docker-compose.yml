@@ -1,0 +1,20 @@
+name: tinyproxy
+services:
+  tinyproxy:
+    container_name: tinyproxy
+    image: ajoergensen/tinyproxy:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: tinyproxy
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 8888
+        published: "8888"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/tinyproxy
+        target: /etc/tinyproxy

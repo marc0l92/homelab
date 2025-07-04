@@ -1,0 +1,42 @@
+name: hungry_erik
+services:
+  qbittorrent-wireguard:
+    container_name: qbittorrent-wireguard
+    image: docker.io/tenseiken/qbittorrent-wireguard:latest
+    restart: unless-stopped
+    network_mode: bridge
+    hostname: qbittorrent-wireguard
+    ipc: private
+    entrypoint:
+      - /bin/bash
+      - /start.sh
+    environment:
+      LAN_NETWORK: 192.168.1.0/24
+      QBT_LEGAL_NOTICE: confirm
+      WEBUI_URL: http://192.168.1.201:8080
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 8999
+        published: "8999"
+        protocol: tcp
+      - target: 8999
+        published: "8999"
+        protocol: udp
+      - target: 8080
+        published: "8082"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/Downloads/qbittorrent
+        target: /downloads
+      - type: bind
+        source: /DATA/AppData/qbittorrent-wireguard/config
+        target: /config
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.conf.all.rp_filter: "2"
+      net.ipv4.conf.all.src_valid_mark: "1"
+      net.ipv6.conf.all.disable_ipv6: "1"

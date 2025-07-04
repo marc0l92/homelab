@@ -1,0 +1,29 @@
+name: nginxproxymanager
+services:
+  nginxproxymanager:
+    container_name: nginxproxymanager
+    image: jc21/nginx-proxy-manager:2.12.3
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: nginxproxymanager
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - target: 80
+        published: "80"
+        protocol: tcp
+      - target: 443
+        published: "443"
+        protocol: tcp
+      - target: 81
+        published: "81"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/nginxproxymanager/data
+        target: /data
+      - type: bind
+        source: /DATA/AppData/nginxproxymanager/etc/letsencrypt
+        target: /etc/letsencrypt
