@@ -141,10 +141,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/sonarr:/config
-      - ${DATA_FOLDER}:/data/media
+      - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/data/download
-      - /mnt:/mnt
-      - /media:/media
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
     ports:
       - 8989:8989
     networks:
@@ -163,10 +163,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/radarr:/config
-      - ${DATA_FOLDER}:/data/media
+      - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/data/download
-      - /mnt:/mnt
-      - /media:/media
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
     ports:
       - 7878:7878
     networks:
@@ -181,10 +181,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/lidarr:/config
-      - ${DATA_FOLDER}:/data/media
+      - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/data/download
-      - /mnt:/mnt
-      - /media:/media
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -207,10 +207,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/bazarr:/config
-      - ${DATA_FOLDER}:/data/media
+      - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/data/download
-      - /mnt:/mnt
-      - /media:/media
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
     ports:
       - 6767:6767
     networks:
@@ -229,10 +229,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
-      - ${DATA_FOLDER}:/data/media
+      - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/data/download
-      - /mnt:/mnt
-      - /media:/media
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
     ports:
       - 8090:8090
     networks:
@@ -251,10 +251,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
-      - ${DATA_FOLDER}:/data/media
+      - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/data/download
-      - /mnt:/mnt
-      - /media:/media
+      - /mnt:/mnt:rslave
+      - /media:/media:rslave
     ports:
       - 8787:8787
     networks:

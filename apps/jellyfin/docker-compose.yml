@@ -37,13 +37,13 @@ services:
         source: /media
         target: /media
         bind:
-          propagation: shared
+          propagation: slave
           recursive: enabled
       - type: bind
         source: /mnt
         target: /mnt
         bind:
-          propagation: shared
+          propagation: slave
           recursive: enabled
     # devices:
       # - /dev/dri:/dev/dri
