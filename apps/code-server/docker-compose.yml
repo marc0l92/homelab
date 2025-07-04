@@ -11,8 +11,6 @@ services:
       PUID: "1000"
       DEFAULT_WORKSPACE: /DATA/AppData
       TZ: Etc/UTC
-    env_file:
-      - stack.env
     ports:
       - target: 8443
         published: "8087"
