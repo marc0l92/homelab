@@ -9,7 +9,7 @@ services:
     ports:
       - 3055:3000
     volumes:
-      - /DATA/AppData/headplane/config:/etc/headplane
+      - /DATA/AppData/headplane/config/config.yaml:/etc/headplane/config.yaml
       - /DATA/AppData/headplane/data:/var/lib/headplane
       - /DATA/AppData/headscale/config:/etc/headscale
       - /var/run/docker.sock:/var/run/docker.sock:ro
