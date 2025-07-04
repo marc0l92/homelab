@@ -23,7 +23,10 @@ services:
       IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
       REDIS_HOSTNAME: immich-redis
     env_file:
-      - stack.env
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
     ports:
       - mode: ingress
         target: 2283
@@ -58,7 +61,10 @@ services:
       DB_PORT: "5432"
       REDIS_HOSTNAME: immich-redis
     env_file:
-      - stack.env
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
     volumes:
       - type: bind
         source: /DATA/AppData/immich/model-cache
@@ -72,7 +78,10 @@ services:
     restart: unless-stopped
     hostname: immich-redis
     env_file:
-      - stack.env
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
     networks:
       - immich-network
     healthcheck:
@@ -91,7 +100,10 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_INITDB_ARGS: "--data-checksums"
     env_file:
-      - stack.env
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
     volumes:
       - type: bind
         source: /DATA/AppData/immich/pgdata
