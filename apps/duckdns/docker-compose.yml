@@ -8,7 +8,7 @@ services:
     hostname: duckdns
     environment:
       SUBDOMAINS: lucarotto
-      TOKEN: f5ea9227-1d9b-453c-900a-f9fe5068c52a
+      TOKEN: ${TOKEN}
       LOG_FILE: "false"
       UPDATE_IP: ipv6
       PGID: "1000"
@@ -16,3 +16,8 @@ services:
       TZ: Etc/UTC
     volumes:
       - /DATA/AppData/duckdns:/config
+    env_file:
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
