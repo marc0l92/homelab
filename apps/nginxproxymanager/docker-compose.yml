@@ -1,11 +1,11 @@
 name: nginxproxymanager
 services:
-  nginxproxymanager:
-    container_name: nginxproxymanager
-    image: jc21/nginx-proxy-manager:2.12.3
+  nginxproxymanager-local:
+    container_name: nginxproxymanager-local
+    image: jc21/nginx-proxy-manager:latest
     network_mode: bridge
     restart: unless-stopped
-    hostname: nginxproxymanager
+    hostname: nginxproxymanager-local
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -13,7 +13,25 @@ services:
     ports:
       - 80:80/tcp
       - 443:443/tcp
-      - 81:81/tcp
+      - 1181:81/tcp
     volumes:
-      - /DATA/AppData/nginxproxymanager/data:/data
-      - /DATA/AppData/nginxproxymanager/etc/letsencrypt:/etc/letsencrypt
+      - /DATA/AppData/nginxproxymanager-local/data:/data
+      - /DATA/AppData/nginxproxymanager-local/letsencrypt:/etc/letsencrypt
+
+  nginxproxymanager-remote:
+    container_name: nginxproxymanager-remote
+    image: jc21/nginx-proxy-manager:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: nginxproxymanager-remote
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - 2280:80/tcp
+      - 2443:443/tcp
+      - 2281:81/tcp
+    volumes:
+      - /DATA/AppData/nginxproxymanager-remote/data:/data
+      - /DATA/AppData/nginxproxymanager-remote/letsencrypt:/etc/letsencrypt
