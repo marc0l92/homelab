@@ -13,7 +13,7 @@ services:
       AFP_GROUP: ${AFP_GROUP}
       ATALKD_INTERFACE: enp1s0
       AFP_CONFIG_POLLING: 5
-      MANUAL_CONFIG: 1
+      # MANUAL_CONFIG: 1 # Uncomment to setup with webmin
       SERVER_NAME: minipc
       PGID: "1000"
       PUID: "1000"
