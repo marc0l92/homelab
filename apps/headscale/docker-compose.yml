@@ -7,9 +7,6 @@ services:
     restart: unless-stopped
     hostname: headscale
     command: serve
-    labels:
-      # This is needed for Headplane to find it and signal it
-      me.tale.headplane.target: headscale
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -21,24 +18,6 @@ services:
       - /DATA/AppData/headscale/data:/var/lib/headscale
       - /DATA/AppData/headscale/config:/etc/headscale
       - /DATA/AppData/headscale/run:/var/run/headscale
-
-  # headplane:
-  #   container_name: headplane
-  #   image: ghcr.io/tale/headplane:latest
-  #   network_mode: bridge
-  #   restart: unless-stopped
-  #   hostname: headplane
-  #.  environment:
-  #     PGID: "1000"
-  #     PUID: "1000"
-  #.    TZ: Etc/UTC
-  #   ports:
-  #     - 3055:3000
-  #   volumes:
-  #     - /DATA/AppData/headplane/config:/etc/headplane
-  #     - /DATA/AppData/headplane/data:/var/lib/headplane
-  #     - /DATA/AppData/headscale/config:/etc/headscale
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
 
   headscale-ui:
     container_name: headscale-ui
