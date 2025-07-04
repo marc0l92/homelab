@@ -187,23 +187,23 @@ services:
       servarrnetwork:
         ipv4_address: 172.39.0.6
 
-  # mylar:
-  #   container_name: mylar
-  #   image: lscr.io/linuxserver/mylar3:latest
-  #   restart: unless-stopped
-  #   hostname: mylar
-  #   environment:
-  #     PGID: "1000"
-  #     PUID: "1000"
-  #     TZ: Etc/UTC
-  #   volumes:
-  #     - ${DATA_FOLDER}:/data
-  #     - /DATA/AppData/servarr/mylar:/config
-  #   ports:
-  #     - 8090:8090
-  #   networks:
-  #     servarrnetwork:
-  #       ipv4_address: 172.39.0.7
+  mylar:
+    container_name: mylar
+    image: lscr.io/linuxserver/mylar3:latest
+    restart: unless-stopped
+    hostname: mylar
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - ${DATA_FOLDER}:/data
+      - /DATA/AppData/servarr/mylar:/config
+    ports:
+      - 8090:8090
+    networks:
+      servarrnetwork:
+        ipv4_address: 172.39.0.7
 
   # readarr:
   #   container_name: readarr
