@@ -125,6 +125,8 @@ services:
       - /DATA/AppData/servarr/sonarr:/config
       - ${DATA_FOLDER}:/data/media
       - ${DOWNLOAD_FOLDER}:/data/download
+      - /mnt:/mnt
+      - /media:/media
     ports:
       - 8989:8989
     networks:
@@ -145,6 +147,8 @@ services:
       - /DATA/AppData/servarr/radarr:/config
       - ${DATA_FOLDER}:/data/media
       - ${DOWNLOAD_FOLDER}:/data/download
+      - /mnt:/mnt
+      - /media:/media
     ports:
       - 7878:7878
     networks:
@@ -161,6 +165,8 @@ services:
       - /DATA/AppData/servarr/lidarr:/config
       - ${DATA_FOLDER}:/data/media
       - ${DOWNLOAD_FOLDER}:/data/download
+      - /mnt:/mnt
+      - /media:/media
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -185,6 +191,8 @@ services:
       - /DATA/AppData/servarr/bazarr:/config
       - ${DATA_FOLDER}:/data/media
       - ${DOWNLOAD_FOLDER}:/data/download
+      - /mnt:/mnt
+      - /media:/media
     ports:
       - 6767:6767
     networks:
@@ -205,6 +213,8 @@ services:
       - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media
       - ${DOWNLOAD_FOLDER}:/data/download
+      - /mnt:/mnt
+      - /media:/media
     ports:
       - 8090:8090
     networks:
@@ -225,6 +235,8 @@ services:
       - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media
       - ${DOWNLOAD_FOLDER}:/data/download
+      - /mnt:/mnt
+      - /media:/media
     ports:
       - 8787:8787
     networks:
