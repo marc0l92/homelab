@@ -26,7 +26,7 @@ services:
       me.tale.headplane.target: headscale
     ports:
       - 8055:8080
-      - 9055:9090
+      # - 9055:9090 # Metrics service
     volumes:
       - /DATA/AppData/headscale/data:/var/lib/headscale
       - /DATA/AppData/headscale/config:/etc/headscale
