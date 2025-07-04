@@ -3,7 +3,6 @@ services:
   immich-server:
     container_name: immich-server
     image: ghcr.io/immich-app/immich-server:release
-    network_mode: bridge
     restart: unless-stopped
     hostname: immich-server
     networks:
@@ -45,7 +44,6 @@ services:
   immich-machine-learning:
     container_name: immich-machine-learning
     image: ghcr.io/immich-app/immich-machine-learning:release
-    network_mode: bridge
     restart: unless-stopped
     hostname: immich-machine-learning
     networks:
@@ -67,7 +65,6 @@ services:
   immich-redis:
     container_name: immich-redis
     image: docker.io/valkey/valkey:8-bookworm@sha256:ff21bc0f8194dc9c105b769aeabf9585fea6a8ed649c0781caeac5cb3c247884
-    network_mode: bridge
     restart: unless-stopped
     hostname: immich-redis
     networks:
@@ -78,7 +75,6 @@ services:
   immich-postgres:
     container_name: immich-postgres
     image: ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0@sha256:fa4f6e0971f454cd95fec5a9aaed2ed93d8f46725cc6bc61e0698e97dba96da1
-    network_mode: bridge
     restart: unless-stopped
     hostname: immich-postgres
     networks:
