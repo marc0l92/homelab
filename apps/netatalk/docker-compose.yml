@@ -2,7 +2,7 @@ name: netatalk
 services:
   netatalk:
     container_name: netatalk
-    image: netatalk:latest
+    image: netatalk/netatalk:latest
     network_mode: bridge
     restart: unless-stopped
     hostname: netatalk
@@ -12,13 +12,15 @@ services:
       AFP_GROUP: ${AFP_GROUP}
       AFP_CONFIG_POLLING: 5
       MANUAL_CONFIG: 1
+      SERVER_NAME: minipc
+      SHARE_NAME: minipc-afp
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 548
-        published: "548"
-        protocol: tcp
+      - 548:548
+    cap_add:
+      - NET_ADMIN
     volumes:
       - /DATA/AppData/netatalk/share:/mnt/afpshare
       - /DATA/AppData/netatalk/backup:/mnt/afpbackup
@@ -34,12 +36,12 @@ services:
 
   webmin:
     container_name: netatalk_webmin
-    image: netatalk_webmin_module:latest
+    image: netatalk/webmin:latest
     network_mode: bridge
     restart: unless-stopped
     hostname: netatalk_webmin
     ports:
-      - "10000:10000"
+      - 10000:10000
     volumes:
       - /DATA/AppData/netatalk/conf:/etc/netatalk
       - /var/run/docker.sock:/var/run/docker.sock
