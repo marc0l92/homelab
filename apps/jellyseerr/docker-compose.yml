@@ -17,5 +17,5 @@ services:
         protocol: tcp
     volumes:
       - type: bind
-        source: /DATA/AppData/big-bear-jellyseerr/config
+        source: /DATA/AppData/jellyseerr/config
         target: /app/config
