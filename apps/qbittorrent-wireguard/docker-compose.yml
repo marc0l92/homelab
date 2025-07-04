@@ -13,7 +13,7 @@ services:
     environment:
       LAN_NETWORK: 192.168.1.0/24
       QBT_LEGAL_NOTICE: confirm
-      WEBUI_URL: http://192.168.1.201:8080
+      WEBUI_URL: http://192.168.5.201:8080
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
