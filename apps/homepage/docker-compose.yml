@@ -12,19 +12,9 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 3000
-        published: "3000"
-        protocol: tcp
+      - 3000:3000/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/homepage/config
-        target: /app/config
-      - type: bind
-        source: /DATA/AppData/homepage/icons
-        target: /app/public/icons
-      - type: bind
-        source: /DATA/AppData/homepage/images
-        target: /app/public/images
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
+      - /DATA/AppData/homepage/config:/app/config
+      - /DATA/AppData/homepage/icons:/app/public/icons
+      - /DATA/AppData/homepage/images:/app/public/images
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -11,10 +11,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 8081
-        published: "8081"
-        protocol: tcp
+      - 8081:8081/tcp
     volumes:
-      - type: bind
-        source: /DATA/Downloads/metube
-        target: /downloads
+      - /DATA/Downloads/metube:/downloads

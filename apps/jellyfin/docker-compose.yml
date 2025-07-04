@@ -11,40 +11,16 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 8096
-        published: "8096"
-        protocol: tcp
-      - target: 8920
-        published: "8920"
-        protocol: tcp
-      - target: 7359
-        published: "7359"
-        protocol: tcp
-      - target: 1900
-        published: "1900"
-        protocol: tcp
+      - 8096:8096/tcp
+      - 8920:8920/tcp
+      - 7359:7359/tcp
+      - 1900:1900/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/jellyfin/config
-        target: /config
-      - type: bind
-        source: /DATA
-        target: /DATA
-      - type: bind
-        source: /opt/vc/lib
-        target: /opt/vc/lib
-      - type: bind
-        source: /media
-        target: /media
-        bind:
-          propagation: slave
-          recursive: enabled
-      - type: bind
-        source: /mnt
-        target: /mnt
-        bind:
-          propagation: slave
-          recursive: enabled
+      - /DATA/AppData/jellyfin/config:/config
+      - /DATA:/DATA
+      - /opt/vc/lib:/opt/vc/lib
+      - /media:/media:rslave
+      - /mnt:/mnt:rslave
     # devices:
       # - /dev/dri:/dev/dri
       # - /dev/vcsm:/dev/vcsm

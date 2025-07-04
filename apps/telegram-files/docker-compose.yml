@@ -16,10 +16,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 80
-        published: "7745"
-        protocol: tcp
+      - 80:7745/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/telegram-files
-        target: /app/data
+      - /DATA/AppData/telegram-files:/app/data

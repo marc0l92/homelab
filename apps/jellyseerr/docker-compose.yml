@@ -12,10 +12,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 5055
-        published: "5055"
-        protocol: tcp
+      - 5055:5055/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/jellyseerr/config
-        target: /app/config
+      - /DATA/AppData/jellyseerr/config:/app/config

@@ -13,46 +13,26 @@ services:
       - -w
       - /opt/adguardhome/work
     environment:
+      PGID: "1000"
+      PUID: "1000"
       TZ: Etc/UTC
     ports:
       # DNS
-      - target: 53
-        published: "53"
-        protocol: tcp
-      - target: 53
-        published: "53"
-        protocol: udp
+      - 53:53/tcp
+      - 53:53/udp
 
       # DHCP
-      # - target: 67
-      #   published: "68"
-      #   protocol: udp
-      # - target: 68
-      #   published: "68"
-      #   protocol: tcp
-      # - target: 68
-      #   published: "68"
-      #   protocol: udp
+      # - 67:68/udp
+      # - 68:68/tcp
+      # - 68:68/udp
 
       # Admin Panel
-      - target: 80
-        published: "3002"
-        protocol: tcp
-      - target: 443
-        published: "3003"
-        protocol: tcp
-      - target: 443
-        published: "3003"
-        protocol: udp
+      - 80:3002/tcp
+      - 443:3003/tcp
+      - 443:3003/udp
 
       # DNS Over TLS
-      - target: 853
-        published: "853"
-        protocol: tcp
+      - 853:853/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/adguard-home/conf
-        target: /opt/adguardhome/conf
-      - type: bind
-        source: /DATA/AppData/adguard-home/work
-        target: /opt/adguardhome/work
+      - /DATA/AppData/adguard-home/conf:/opt/adguardhome/conf
+      - /DATA/AppData/adguard-home/work:/opt/adguardhome/work

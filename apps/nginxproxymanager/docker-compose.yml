@@ -11,19 +11,9 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 80
-        published: "80"
-        protocol: tcp
-      - target: 443
-        published: "443"
-        protocol: tcp
-      - target: 81
-        published: "81"
-        protocol: tcp
+      - 80:80/tcp
+      - 443:443/tcp
+      - 81:81/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/nginxproxymanager/data
-        target: /data
-      - type: bind
-        source: /DATA/AppData/nginxproxymanager/etc/letsencrypt
-        target: /etc/letsencrypt
+      - /DATA/AppData/nginxproxymanager/data:/data
+      - /DATA/AppData/nginxproxymanager/etc/letsencrypt:/etc/letsencrypt

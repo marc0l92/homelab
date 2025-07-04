@@ -7,14 +7,12 @@ services:
     restart: unless-stopped
     hostname: mealie
     ports:
-      - target: 9000
-        published: "9925"
-        protocol: tcp
-    volumes:
-      - /DATA/AppData/mealie:/app/data/
+      - 9000:9925/tcp
     environment:
       ALLOW_SIGNUP: "true"
       BASE_URL: https://mealie.lucarotto.duckdns.org
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
+    volumes:
+      - /DATA/AppData/mealie:/app/data/

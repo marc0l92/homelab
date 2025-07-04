@@ -11,10 +11,6 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 5230
-        published: "5230"
-        protocol: tcp
+      - 5230:5230/tcp
     volumes:
-      - type: bind
-        source: /DATA/AppData/memos/memos
-        target: /var/opt/memos
+      - /DATA/AppData/memos/memos:/var/opt/memos

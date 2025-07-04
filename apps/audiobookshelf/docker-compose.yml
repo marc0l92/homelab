@@ -11,19 +11,9 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - target: 80
-        published: "1080"
-        protocol: tcp
+      - 80:1080/tcp
     volumes:
-      - type: bind
-        source: /mnt/data/Media/Audiobooks
-        target: /audiobooks
-      - type: bind
-        source: /mnt/data/Media/Podcasts
-        target: /podcasts
-      - type: bind
-        source: /DATA/AppData/audiobookshelf/data/config
-        target: /config
-      - type: bind
-        source: /DATA/AppData/audiobookshelf/data/metadata
-        target: /metadata
+      - /mnt/data/Media/Audiobooks:/audiobooks
+      - /mnt/data/Media/Podcasts:/podcasts
+      - /DATA/AppData/audiobookshelf/data/config:/config
+      - /DATA/AppData/audiobookshelf/data/metadata:/metadata
