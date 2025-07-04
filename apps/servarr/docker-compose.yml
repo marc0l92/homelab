@@ -176,7 +176,6 @@ services:
       gluetun:
         condition: service_healthy
         restart: true
-      
 
   lidarr:
     container_name: lidarr
