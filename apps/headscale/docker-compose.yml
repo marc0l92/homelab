@@ -1,19 +1,5 @@
 name: headscale
 services:
-  headplane:
-    container_name: headplane
-    image: ghcr.io/tale/headplane:latest
-    network_mode: bridge
-    restart: unless-stopped
-    hostname: headplane
-    ports:
-      - 3055:3000
-    volumes:
-      - /DATA/AppData/headplane/config:/etc/headplane
-      - /DATA/AppData/headplane/data:/var/lib/headplane
-      - /DATA/AppData/headscale/config:/etc/headscale
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-
   headscale:
     container_name: headscale
     image: ghcr.io/juanfont/headscale:latest
@@ -30,3 +16,25 @@ services:
     volumes:
       - /DATA/AppData/headscale/data:/var/lib/headscale
       - /DATA/AppData/headscale/config:/etc/headscale
+
+  # headplane:
+  #   container_name: headplane
+  #   image: ghcr.io/tale/headplane:latest
+  #   network_mode: bridge
+  #   restart: unless-stopped
+  #   hostname: headplane
+  #   ports:
+  #     - 3055:3000
+  #   volumes:
+  #     - /DATA/AppData/headplane/config:/etc/headplane
+  #     - /DATA/AppData/headplane/data:/var/lib/headplane
+  #     - /DATA/AppData/headscale/config:/etc/headscale
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  headscale-ui:
+    image: ghcr.io/gurucomputing/headscale-ui:latest
+    restart: unless-stopped
+    container_name: headscale-ui
+    ports:
+    - 5443:8443
+    - 5080:8080
