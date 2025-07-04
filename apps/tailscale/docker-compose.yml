@@ -1,0 +1,22 @@
+name: tailscale
+services:
+  tailscale:
+    container_name: tailscale
+    image: tailscale/tailscale:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: tailscale
+    environment:
+      TS_AUTHKEY: tskey-client-notAReal-OAuthClientSecret1Atawk
+      TS_EXTRA_ARGS: --advertise-tags=tag:container
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: false
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    volumes:
+      - /DATA/AppData/tailscale/state:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - net_admin
