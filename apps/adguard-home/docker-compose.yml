@@ -13,20 +13,23 @@ services:
       - -w
       - /opt/adguardhome/work
     environment:
-      # PGID: "1000"
-      # PUID: "1000"
+      PGID: "1000"
+      PUID: "1000"
       TZ: Etc/UTC
     ports:
       # DNS
-      - 53:53
+      - 53:53/tcp
+      - 53:53/udp
 
       # DHCP
       # - 67:68/udp
-      # - 68:68
+      # - 68:68/tcp
+      # - 68:68/udp
 
       # Admin Panel
       - 3002:80/tcp
-      - 3003:443
+      - 3003:443/tcp
+      - 3003:443/udp
 
       # DNS Over TLS
       - 853:853/tcp

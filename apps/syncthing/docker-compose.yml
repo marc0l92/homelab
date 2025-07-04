@@ -21,7 +21,8 @@ services:
       TZ: Etc/UTC
     ports:
       - 8385:8384/tcp
-      - 22001:22000
+      - 22001:22000/tcp
+      - 22001:22000/udp
       - 21028:21027/udp
     volumes:
       - /DATA/AppData/syncthing-local/config:/config
@@ -64,7 +65,8 @@ services:
       TZ: Etc/UTC
     ports:
       - 8384:8384/tcp
-      - 22000:22000
+      - 22000:22000/tcp
+      - 22000:22000/udp
       - 21027:21027/udp
     volumes:
       - /DATA/AppData/syncthing-remote/config:/config
