@@ -56,7 +56,7 @@ services:
     volumes:
       - type: bind
         source: /DATA/AppData/immich/model-cache
-        target: model-cache
+        target: /cache
     healthcheck:
       disable: false
 
