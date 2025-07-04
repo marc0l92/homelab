@@ -148,7 +148,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/radarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/download
+      - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -169,7 +169,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/sonarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/download
+      - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -191,7 +191,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/lidarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/download
+      - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -212,7 +212,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/bazarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/download
+      - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -233,7 +233,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/download
+      - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
@@ -254,7 +254,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/download
+      - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
