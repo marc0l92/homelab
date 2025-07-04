@@ -1,0 +1,27 @@
+name: homepage
+services:
+  homepage:
+    container_name: homepage
+    image: ghcr.io/gethomepage/homepage:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: homepage
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: 192.168.1.201:3000,homepage.local
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /DATA/AppData/homepage/config
+        target: /app/config
+      - type: bind
+        source: /DATA/AppData/homepage/icons
+        target: /app/public/icons
+      - type: bind
+        source: /DATA/AppData/homepage/images
+        target: /app/public/images
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
