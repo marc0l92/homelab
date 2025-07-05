@@ -1,0 +1,20 @@
+name: dozzle
+services:
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: dozzle
+    environment:
+      DOZZLE_ENABLE_ACTIONS: "true"
+      DOZZLE_ENABLE_SHELL: "true"
+      DOZZLE_NO_ANALYTICS: "true"
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - 8041:8080/tcp
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /DATA/AppData/dozzle:/data
