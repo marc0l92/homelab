@@ -1,0 +1,22 @@
+name: stirling-pdf
+services:
+  stirling-pdf:
+    container_name: stirling-pdf
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    network_mode: bridge
+    restart: unless-stopped
+    hostname: stirling-pdf
+    environment:
+      DOCKER_ENABLE_SECURITY: false
+      LANGS: en_US
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - 8042:8080/tcp
+    volumes:
+      - /DATA/AppData/stirling-pdf/trainingData:/usr/share/tessdata # Required for extra OCR languages
+      - /DATA/AppData/stirling-pdf/extraConfigs:/configs
+      - /DATA/AppData/stirling-pdf/customFiles:/customFiles/
+      # - /DATA/AppData/stirling-pdf/logs:/logs/
+      - /DATA/AppData/stirling-pdf/pipeline:/pipeline/
