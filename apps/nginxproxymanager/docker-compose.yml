@@ -12,7 +12,9 @@ services:
       TZ: Etc/UTC
     ports:
       - 80:80/tcp
+      - 80:80/udp
       - 443:443/tcp
+      - 443:443/udp
       - 1181:81/tcp
     volumes:
       - /DATA/AppData/nginxproxymanager-local/data:/data
@@ -30,7 +32,9 @@ services:
       TZ: Etc/UTC
     ports:
       - 2280:80/tcp
+      - 2280:80/udp
       - 2443:443/tcp
+      - 2443:443/udp
       - 2281:81/tcp
     volumes:
       - /DATA/AppData/nginxproxymanager-remote/data:/data

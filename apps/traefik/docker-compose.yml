@@ -1,0 +1,26 @@
+name: traefik
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v3
+    networks:
+      - traefik
+    restart: unless-stopped
+    hostname: traefik
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports:
+      - 80:80/tcp
+      - 80:80/udp
+      - 443:443/tcp
+      - 443:443/udp
+      - 1180:8080/tcp
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /DATA/AppData/traefik/config:/etc/traefik:ro
+
+networks:
+  traefik:
+    driver: bridge
