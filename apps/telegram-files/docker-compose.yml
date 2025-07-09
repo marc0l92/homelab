@@ -3,9 +3,14 @@ services:
   telegram-files:
     container_name: telegram-files
     image: ghcr.io/jarvis2f/telegram-files:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: telegram-files
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.telegram-files.rule=Host(`telegram-files.lucarotto-local.duckdns.org`)
+      - traefik.http.routers.telegram-files.entrypoints=web
     environment:
       APP_ENV: prod
       APP_ROOT: /app/data
@@ -19,3 +24,7 @@ services:
       - 7745:80/tcp
     volumes:
       - /DATA/AppData/telegram-files:/app/data
+
+networks:
+  traefik:
+    external: true
