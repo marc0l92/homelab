@@ -9,6 +9,7 @@ services:
     hostname: traefik
     environment:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
+      DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
@@ -21,6 +22,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/traefik/config:/etc/traefik:ro
+      - /DATA/AppData/traefik/certs:/var/traefik/certs:rw
     env_file:
       - path: .env
         required: true
