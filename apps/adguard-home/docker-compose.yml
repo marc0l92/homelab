@@ -16,15 +16,15 @@ services:
     labels:
       traefik.enable: true
 
-      traefik.http.routers.adguard-home-duckdns-local.rule: Host(`adguard-home.lucarotto-local.duckdns.org`)
-      traefik.http.routers.adguard-home-duckdns-local.entrypoints: https
-      traefik.http.routers.adguard-home-duckdns-local.tls: true
-      traefik.http.routers.adguard-home-duckdns-local.tls.certresolver: duckdns
-      traefik.http.routers.adguard-home-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.http.routers.adguard-home-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+      traefik.http.routers.adguard-duckdns-local.rule: Host(`adguard.lucarotto-local.duckdns.org`)
+      traefik.http.routers.adguard-duckdns-local.entrypoints: https
+      traefik.http.routers.adguard-duckdns-local.tls: true
+      traefik.http.routers.adguard-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.adguard-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.adguard-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.http.routers.adguard-home-local.rule: Host(`adguard-home.l.lucarotto.it`)
-      traefik.http.routers.adguard-home-local.entrypoints: http
+      traefik.http.routers.adguard-local.rule: Host(`adguard.l.lucarotto.it`)
+      traefik.http.routers.adguard-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
