@@ -10,6 +10,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
+      traefik.http.services.headscale.loadbalancer.server.port: "8080"
 
       traefik.http.routers.headscale-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`)
       traefik.http.routers.headscale-duckdns-local.entrypoints: https
@@ -41,6 +42,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
+      traefik.http.services.headscale-ui.loadbalancer.server.port: "8080"
 
       traefik.http.routers.headscale-ui-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`) && PathPrefix(`/web`)
       traefik.http.routers.headscale-ui-duckdns-local.entrypoints: https
@@ -56,8 +58,8 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-    - 5443:8443
-    - 5080:8080
+    # - 5443:8443 # HTTPS
+    - 5080:8080 # HTTP
 
 networks:
   traefik:
