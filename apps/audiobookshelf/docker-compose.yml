@@ -9,6 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
+      traefik.http.services.audiobookshelf.loadbalancer.server.port: "80"
 
       traefik.http.routers.audiobookshelf-duckdns-local.rule: Host(`audiobookshelf.lucarotto-local.duckdns.org`)
       traefik.http.routers.audiobookshelf-duckdns-local.entrypoints: https

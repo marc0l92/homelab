@@ -9,6 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
+      traefik.http.services.dozzle.loadbalancer.server.port: "8080"
 
       traefik.http.routers.dozzle-duckdns-local.rule: Host(`dozzle.lucarotto-local.duckdns.org`)
       traefik.http.routers.dozzle-duckdns-local.entrypoints: https
