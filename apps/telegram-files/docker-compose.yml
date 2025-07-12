@@ -8,14 +8,15 @@ services:
     networks:
       - traefik
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.telegram-files-duckdns-local.rule=Host(`telegram-files.lucarotto-local.duckdns.org`)
-      - traefik.http.routers.telegram-files-duckdns-local.entrypoints=websecure
-      - traefik.http.routers.telegram-files-duckdns-local.tls=true
-      - traefik.http.routers.telegram-files-duckdns-local.tls.certresolver=duckdns
-      - traefik.http.routers.telegram-files-local.rule=Host(`telegram-files.l.lucarotto.it`)
-      - traefik.http.routers.telegram-files-local.entrypoints=web
+      traefik.enable: true
 
+      traefik.http.routers.telegram-files-duckdns-local.rule: Host(`telegram-files.lucarotto-local.duckdns.org`)
+      traefik.http.routers.telegram-files-duckdns-local.entrypoints: websecure
+      traefik.http.routers.telegram-files-duckdns-local.tls: true
+      traefik.http.routers.telegram-files-duckdns-local.tls.certresolver: duckdns
+
+      traefik.http.routers.telegram-files-local.rule: Host(`telegram-files.l.lucarotto.it`)
+      traefik.http.routers.telegram-files-local.entrypoints: web
     environment:
       APP_ENV: prod
       APP_ROOT: /app/data
