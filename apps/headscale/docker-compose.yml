@@ -3,10 +3,23 @@ services:
   headscale:
     container_name: headscale
     image: ghcr.io/juanfont/headscale:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: headscale
     command: serve
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+
+      traefik.http.routers.headscale-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`)
+      traefik.http.routers.headscale-duckdns-local.entrypoints: https
+      traefik.http.routers.headscale-duckdns-local.tls: true
+      traefik.http.routers.headscale-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.headscale-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.headscale-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.headscale-local.rule: Host(`headscale.l.lucarotto.it`)
+      traefik.http.routers.headscale-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -22,9 +35,22 @@ services:
   headscale-ui:
     container_name: headscale-ui
     image: ghcr.io/gurucomputing/headscale-ui:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: headscale-ui
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+
+      traefik.http.routers.headscale-ui-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`) && PathPrefix(`/web`)
+      traefik.http.routers.headscale-ui-duckdns-local.entrypoints: https
+      traefik.http.routers.headscale-ui-duckdns-local.tls: true
+      traefik.http.routers.headscale-ui-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.headscale-ui-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.headscale-ui-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.headscale-ui-local.rule: Host(`headscale.l.lucarotto.it`) && PathPrefix(`/web`)
+      traefik.http.routers.headscale-ui-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -32,3 +58,7 @@ services:
     ports:
     - 5443:8443
     - 5080:8080
+
+networks:
+  traefik:
+    external: true
