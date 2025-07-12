@@ -10,7 +10,7 @@ services:
     labels:
       traefik.enable: true
 
-      traefik.http.routers.telegram-files-duckdns-local.rule: Host(`lucarotto-l.duckdns.org`)
+      traefik.http.routers.telegram-files-duckdns-local.rule: Host(`telegram-files.lucarotto-l.duckdns.org`)
       traefik.http.routers.telegram-files-duckdns-local.entrypoints: websecure
       traefik.http.routers.telegram-files-duckdns-local.tls: true
       traefik.http.routers.telegram-files-duckdns-local.tls.certresolver: duckdns
