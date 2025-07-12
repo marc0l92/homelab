@@ -3,9 +3,22 @@ services:
   audiobookshelf:
     container_name: audiobookshelf
     image: ghcr.io/advplyr/audiobookshelf:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: audiobookshelf
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+
+      traefik.http.routers.audiobookshelf-duckdns-local.rule: Host(`audiobookshelf.lucarotto-local.duckdns.org`)
+      traefik.http.routers.audiobookshelf-duckdns-local.entrypoints: https
+      traefik.http.routers.audiobookshelf-duckdns-local.tls: true
+      traefik.http.routers.audiobookshelf-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.audiobookshelf-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.audiobookshelf-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.audiobookshelf-local.rule: Host(`audiobookshelf.l.lucarotto.it`)
+      traefik.http.routers.audiobookshelf-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -17,3 +30,7 @@ services:
       - /mnt/data/Media/Podcasts:/podcasts
       - /DATA/AppData/audiobookshelf/data/config:/config
       - /DATA/AppData/audiobookshelf/data/metadata:/metadata
+
+networks:
+  traefik:
+    external: true

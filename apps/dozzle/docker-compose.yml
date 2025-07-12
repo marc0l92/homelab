@@ -3,9 +3,22 @@ services:
   dozzle:
     container_name: dozzle
     image: amir20/dozzle:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: dozzle
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+
+      traefik.http.routers.dozzle-duckdns-local.rule: Host(`dozzle.lucarotto-local.duckdns.org`)
+      traefik.http.routers.dozzle-duckdns-local.entrypoints: https
+      traefik.http.routers.dozzle-duckdns-local.tls: true
+      traefik.http.routers.dozzle-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.dozzle-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.dozzle-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.dozzle-local.rule: Host(`dozzle.l.lucarotto.it`)
+      traefik.http.routers.dozzle-local.entrypoints: http
     environment:
       DOZZLE_ENABLE_ACTIONS: "true"
       DOZZLE_ENABLE_SHELL: "true"
@@ -18,3 +31,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/dozzle:/data
+
+networks:
+  traefik:
+    external: true

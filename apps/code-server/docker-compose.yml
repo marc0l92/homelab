@@ -2,10 +2,23 @@ name: code-server
 services:
   code-server:
     container_name: code-server
-    image: linuxserver/code-server:4.100.2
-    network_mode: bridge
+    image: linuxserver/code-server:latest
     restart: unless-stopped
     hostname: code-server
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+
+      traefik.http.routers.code-server-duckdns-local.rule: Host(`code-server.lucarotto-local.duckdns.org`)
+      traefik.http.routers.code-server-duckdns-local.entrypoints: https
+      traefik.http.routers.code-server-duckdns-local.tls: true
+      traefik.http.routers.code-server-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.code-server-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.code-server-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.code-server-local.rule: Host(`code-server.l.lucarotto.it`)
+      traefik.http.routers.code-server-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -17,3 +30,7 @@ services:
       - /DATA/AppData/code-server/config:/config
       - /DATA/AppData/code-server/projects:/projects
       - /DATA:/DATA
+
+networks:
+  traefik:
+    external: true

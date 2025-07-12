@@ -3,11 +3,24 @@ services:
   cup:
     container_name: cup
     image: ghcr.io/sergi0g/cup:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: cup
     command:
       - serve
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+
+      traefik.http.routers.cup-duckdns-local.rule: Host(`cup.lucarotto-local.duckdns.org`)
+      traefik.http.routers.cup-duckdns-local.entrypoints: https
+      traefik.http.routers.cup-duckdns-local.tls: true
+      traefik.http.routers.cup-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.cup-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.cup-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.cup-local.rule: Host(`cup.l.lucarotto.it`)
+      traefik.http.routers.cup-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -17,3 +30,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/cup:/config
+
+networks:
+  traefik:
+    external: true
