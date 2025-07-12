@@ -10,6 +10,7 @@ services:
     environment:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
       DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
+      DUCKDNS_SUBDOMAIN: lucarotto-l
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
