@@ -19,6 +19,13 @@ services:
 
       traefik.http.routers.telegram-files-local.rule: Host(`telegram-files.l.lucarotto.it`)
       traefik.http.routers.telegram-files-local.entrypoints: http
+
+      traefik.http.routers.telegram-files-local-secure.rule: Host(`telegram-files.l.lucarotto.it`)
+      traefik.http.routers.telegram-files-local-secure.entrypoints: https
+      traefik.http.routers.telegram-files-local-secure.tls: true
+      traefik.http.routers.telegram-files-local-secure.tls.certresolver: lucarotto-tls
+      traefik.http.routers.telegram-files-local-secure.tls.domains[0].main: l.lucarotto.it
+      traefik.http.routers.telegram-files-local-secure.tls.domains[0].sans: "*.l.lucarotto.it"
     environment:
       APP_ENV: prod
       APP_ROOT: /app/data
