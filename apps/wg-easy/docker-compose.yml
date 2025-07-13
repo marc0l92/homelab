@@ -11,14 +11,14 @@ services:
       traefik.enable: true
       traefik.http.services.wg-easy.loadbalancer.server.port: "51821"
 
-      traefik.http.routers.wg-easy-duckdns-local.rule: Host(`wg-easy.lucarotto-local.duckdns.org`)
+      traefik.http.routers.wg-easy-duckdns-local.rule: Host(`wg-easy.lucarotto-local.duckdns.org`) || Host(`wireguard.lucarotto-local.duckdns.org`)
       traefik.http.routers.wg-easy-duckdns-local.entrypoints: https
       traefik.http.routers.wg-easy-duckdns-local.tls: true
       traefik.http.routers.wg-easy-duckdns-local.tls.certresolver: duckdns
       traefik.http.routers.wg-easy-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
       traefik.http.routers.wg-easy-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.http.routers.wg-easy-local.rule: Host(`wg-easy.l.lucarotto.it`)
+      traefik.http.routers.wg-easy-local.rule: Host(`wg-easy.l.lucarotto.it`) || Host(`wireguard.l.lucarotto.it`)
       traefik.http.routers.wg-easy-local.entrypoints: http
     environment:
       PASSWORD_HASH: ${PASSWORD_HASH}
