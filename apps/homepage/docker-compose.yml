@@ -11,7 +11,7 @@ services:
       traefik.enable: true
       traefik.http.services.homepage.loadbalancer.server.port: "3000"
 
-      traefik.http.routers.homepage-duckdns-local.rule: Host(`homepage.lucarotto-local.duckdns.org`)
+      traefik.http.routers.homepage-duckdns-local.rule: Host(`homepage.lucarotto-local.duckdns.org`) || Host(`lucarotto-local.duckdns.org`)
       traefik.http.routers.homepage-duckdns-local.entrypoints: https
       traefik.http.routers.homepage-duckdns-local.tls: true
       traefik.http.routers.homepage-duckdns-local.tls.certresolver: duckdns
@@ -21,12 +21,13 @@ services:
       traefik.http.routers.homepage-local.rule: Host(`homepage.l.lucarotto.it`) || Host(`l.lucarotto.it`)
       traefik.http.routers.homepage-local.entrypoints: http
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.local,homepage.lucarotto-local.duckdns.org,homepage.lucarotto.duckdns.org,homepage.l.lucarotto.it,l.lucarotto.it
+      HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.lucarotto-local.duckdns.org,lucarotto-local.duckdns.org,homepage.l.lucarotto.it,l.lucarotto.it
       # PGID: "1000" # Root permission needed to access Docker socket
       # PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 3000:3000/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 3000:3000/tcp
     volumes:
       - /DATA/AppData/homepage/config:/app/config
       - /DATA/AppData/homepage/icons:/app/public/icons

@@ -6,7 +6,25 @@ services:
     restart: unless-stopped
     hostname: immich-server
     networks:
-      - immich-network
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.immich.loadbalancer.server.port: "8080"
+
+      traefik.http.routers.immich-duckdns-local.rule: Host(`immich.lucarotto-local.duckdns.org`)
+      traefik.http.routers.immich-duckdns-local.entrypoints: https
+      traefik.http.routers.immich-duckdns-local.tls: true
+      traefik.http.routers.immich-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.immich-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.immich-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.immich-local.rule: Host(`immich.l.lucarotto.it`)
+      traefik.http.routers.immich-local.entrypoints: http
+
+      traefik.http.routers.immich-internet.rule: Host(`photo.lucarotto.it`)
+      traefik.http.routers.immich-internet.entrypoints: https-internet
+      traefik.http.routers.immich-internet.tls: true
+      traefik.http.routers.immich-internet.tls.certresolver: lucarotto-http
     depends_on:
       immich-postgres:
         condition: service_started
@@ -30,14 +48,18 @@ services:
         required: true
       - path: ../../stack.env
         required: false
-    ports:
-      - 2283:2283/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 2283:2283/tcp
     volumes:
       - /mnt/data/Gallery/immich:/usr/src/app/upload
       - /mnt/data/Gallery/kDrive:/usr/src/app/libraries
       - /etc/localtime:/etc/localtime:ro
     healthcheck:
       disable: false
+    dns:
+      - 172.18.0.100
+
 
   immich-machine-learning:
     container_name: immich-machine-learning
@@ -45,7 +67,7 @@ services:
     restart: unless-stopped
     hostname: immich-machine-learning
     networks:
-      - immich-network
+      - traefik
     environment:
       DB_DATABASE_NAME: immich
       DB_HOSTNAME: immich-postgres
@@ -66,6 +88,7 @@ services:
     healthcheck:
       disable: false
 
+
   immich-redis:
     container_name: immich-redis
     image: docker.io/valkey/valkey:8-bookworm@sha256:ff21bc0f8194dc9c105b769aeabf9585fea6a8ed649c0781caeac5cb3c247884
@@ -81,9 +104,10 @@ services:
       - path: ../../stack.env
         required: false
     networks:
-      - immich-network
+      - traefik
     healthcheck:
       test: redis-cli ping || exit 1
+
 
   immich-postgres:
     container_name: immich-postgres
@@ -91,7 +115,7 @@ services:
     restart: unless-stopped
     hostname: immich-postgres
     networks:
-      - immich-network
+      - traefik
     environment:
       POSTGRES_DB: immich
       POSTGRES_USER: ${DB_USERNAME}
@@ -108,6 +132,7 @@ services:
     volumes:
       - /DATA/AppData/immich/pgdata:/var/lib/postgresql/data
 
+
 networks:
-  immich-network:
-    driver: bridge
+  traefik:
+    external: true

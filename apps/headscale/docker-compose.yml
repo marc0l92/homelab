@@ -61,6 +61,10 @@ services:
 
       traefik.http.routers.headscale-ui-local.rule: Host(`headscale.l.lucarotto.it`) && PathPrefix(`/web`)
       traefik.http.routers.headscale-ui-local.entrypoints: http
+    depends_on:
+      headscale:
+        condition: service_started
+        required: true
     environment:
       PGID: "1000"
       PUID: "1000"
