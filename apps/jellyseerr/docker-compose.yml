@@ -29,6 +29,8 @@ services:
       - 5055:5055/tcp
     volumes:
       - /DATA/AppData/jellyseerr/config:/app/config
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

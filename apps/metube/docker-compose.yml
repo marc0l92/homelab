@@ -28,6 +28,8 @@ services:
       - 8081:8081/tcp
     volumes:
       - /DATA/Downloads/metube:/downloads
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

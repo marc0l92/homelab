@@ -31,6 +31,8 @@ services:
       - 9925:9000/tcp
     volumes:
       - /DATA/AppData/mealie:/app/data
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

@@ -32,6 +32,8 @@ services:
       - /DATA/AppData/headscale/data:/var/lib/headscale
       - /DATA/AppData/headscale/config:/etc/headscale
       - /DATA/AppData/headscale/run:/var/run/headscale
+    dns:
+      - 172.18.0.100
 
   headscale-ui:
     container_name: headscale-ui
@@ -60,6 +62,8 @@ services:
     ports:
     # - 5443:8443 # HTTPS
     - 5080:8080 # HTTP
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

@@ -33,6 +33,8 @@ services:
     volumes:
       - /DATA/AppData/navidrome/data:/data
       - /DATA/Media/Music:/music
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

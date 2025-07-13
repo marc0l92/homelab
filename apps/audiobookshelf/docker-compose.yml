@@ -32,6 +32,8 @@ services:
       - /mnt/data/Media/Podcasts:/podcasts
       - /DATA/AppData/audiobookshelf/data/config:/config
       - /DATA/AppData/audiobookshelf/data/metadata:/metadata
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

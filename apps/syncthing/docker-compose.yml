@@ -57,6 +57,8 @@ services:
       - SETPCAP
       - SETUID
       - SYS_CHROOT
+    dns:
+      - 172.18.0.100
 
   syncthing-remote:
     container_name: syncthing-remote
@@ -114,6 +116,8 @@ services:
       - SETPCAP
       - SETUID
       - SYS_CHROOT
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

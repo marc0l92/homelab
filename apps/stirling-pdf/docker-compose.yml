@@ -31,8 +31,10 @@ services:
     volumes:
       - /DATA/AppData/stirling-pdf/trainingData:/usr/share/tessdata # Required for extra OCR languages
       - /DATA/AppData/stirling-pdf/extraConfigs:/configs
-      - /DATA/AppData/stirling-pdf/customFiles:/customFiles/
-      - /DATA/AppData/stirling-pdf/pipeline:/pipeline/
+      - /DATA/AppData/stirling-pdf/customFiles:/customFiles
+      - /DATA/AppData/stirling-pdf/pipeline:/pipeline
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

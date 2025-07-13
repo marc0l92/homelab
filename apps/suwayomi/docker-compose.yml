@@ -29,6 +29,8 @@ services:
       - 4567:4567/tcp
     volumes:
       - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

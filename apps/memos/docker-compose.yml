@@ -28,6 +28,8 @@ services:
       - 5230:5230/tcp
     volumes:
       - /DATA/AppData/memos/memos:/var/opt/memos
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

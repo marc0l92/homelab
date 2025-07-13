@@ -32,6 +32,8 @@ services:
       - /DATA/AppData/code-server/config:/config
       - /DATA/AppData/code-server/projects:/projects
       - /DATA:/DATA
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

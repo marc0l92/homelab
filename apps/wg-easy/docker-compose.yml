@@ -44,6 +44,8 @@ services:
         required: true
       - path: ../../stack.env
         required: false
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:
