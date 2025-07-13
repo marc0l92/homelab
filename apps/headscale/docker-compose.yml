@@ -26,8 +26,6 @@ services:
       traefik.http.routers.headscale-internet.entrypoints: https-internet
       traefik.http.routers.headscale-internet.tls: true
       traefik.http.routers.headscale-internet.tls.certresolver: lucarotto-http
-      traefik.http.routers.headscale-internet.tls.domains[0].main: lucarotto.it
-      traefik.http.routers.headscale-internet.tls.domains[0].sans: "*.lucarotto.it"
     environment:
       PGID: "1000"
       PUID: "1000"
