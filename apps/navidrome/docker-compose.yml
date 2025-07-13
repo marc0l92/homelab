@@ -28,8 +28,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 4533:4533/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 4533:4533/tcp
     volumes:
       - /DATA/AppData/navidrome/data:/data
       - /DATA/Media/Music:/music

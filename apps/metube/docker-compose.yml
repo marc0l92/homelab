@@ -9,7 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.metube.loadbalancer.server.port: "80"
+      traefik.http.services.metube.loadbalancer.server.port: "8081"
 
       traefik.http.routers.metube-duckdns-local.rule: Host(`metube.lucarotto-local.duckdns.org`)
       traefik.http.routers.metube-duckdns-local.entrypoints: https
@@ -24,8 +24,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 8081:8081/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8081:8081/tcp
     volumes:
       - /DATA/Downloads/metube:/downloads
     dns:
