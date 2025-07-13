@@ -87,14 +87,14 @@ services:
       traefik.enable: true
       traefik.http.services.headscale-ui2.loadbalancer.server.port: "80"
 
-      traefik.http.routers.headscale-ui2-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`) && PathPrefix(`/web2`)
+      traefik.http.routers.headscale-ui2-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`) && PathPrefix(`/manager`)
       traefik.http.routers.headscale-ui2-duckdns-local.entrypoints: https
       traefik.http.routers.headscale-ui2-duckdns-local.tls: true
       traefik.http.routers.headscale-ui2-duckdns-local.tls.certresolver: duckdns
       traefik.http.routers.headscale-ui2-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
       traefik.http.routers.headscale-ui2-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.http.routers.headscale-ui2-local.rule: Host(`headscale.l.lucarotto.it`) && PathPrefix(`/web2`)
+      traefik.http.routers.headscale-ui2-local.rule: Host(`headscale.l.lucarotto.it`) && PathPrefix(`/manager`)
       traefik.http.routers.headscale-ui2-local.entrypoints: http
     depends_on:
       headscale:
