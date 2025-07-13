@@ -41,8 +41,9 @@ services:
       # - 68:68/udp
 
       # Admin Panel
-      - 3002:80/tcp
-      - 3003:443/tcp
+      # Disabled in favor of Traefik routing
+      # - 3002:80/tcp # HTTP Admin Panel
+      # - 3003:443/tcp # HTTPS Admin Panel
 
       # DNS Over TLS
       - 853:853/tcp
