@@ -3,7 +3,6 @@ services:
   mealie:
     container_name: mealie
     image: ghcr.io/mealie-recipes/mealie:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: mealie
     networks:
