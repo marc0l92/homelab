@@ -35,12 +35,16 @@ services:
       # - 7359:7359/udp # Zeroconf
     volumes:
       - /DATA/AppData/jellyfin/config:/config
+      - /etc/localtime:/etc/localtime:ro
       - /DATA:/DATA
       - /opt/vc/lib:/opt/vc/lib
       - /media:/media:rslave
       - /mnt:/mnt:rslave
     devices:
       - /dev/dri:/dev/dri
+    group_add:
+      - "44"   # Your video GID
+      - "993"  # Your render GID
     dns:
       - 172.18.0.100
 
