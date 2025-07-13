@@ -32,7 +32,7 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
+    ports: []
       # Disabled in favor of Traefik routing
       # - 8055:8080/tcp # STUN server
       # - 9055:9090/tcp # Metrics service
@@ -67,8 +67,8 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      # Disabled in favor of Traefik routing
+    ports: []
+    # Disabled in favor of Traefik routing
     # - 5080:8080/tcp # HTTP
     # - 5443:8443/tcp # HTTPS
     dns:
