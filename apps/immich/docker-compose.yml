@@ -9,7 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.immich.loadbalancer.server.port: "8080"
+      traefik.http.services.immich.loadbalancer.server.port: "2283"
 
       traefik.http.routers.immich-duckdns-local.rule: Host(`immich.lucarotto-local.duckdns.org`)
       traefik.http.routers.immich-duckdns-local.entrypoints: https
