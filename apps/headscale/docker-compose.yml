@@ -76,6 +76,40 @@ services:
     dns:
       - 172.18.0.100
 
+  headscale-ui2:
+    container_name: headscale-ui2
+    image: simcu/headscale-ui:latest
+    restart: unless-stopped
+    hostname: headscale-ui2
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.headscale-ui2.loadbalancer.server.port: "80"
+
+      traefik.http.routers.headscale-ui2-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`) && PathPrefix(`/web2`)
+      traefik.http.routers.headscale-ui2-duckdns-local.entrypoints: https
+      traefik.http.routers.headscale-ui2-duckdns-local.tls: true
+      traefik.http.routers.headscale-ui2-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.headscale-ui2-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.headscale-ui2-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.headscale-ui2-local.rule: Host(`headscale.l.lucarotto.it`) && PathPrefix(`/web2`)
+      traefik.http.routers.headscale-ui2-local.entrypoints: http
+    depends_on:
+      headscale:
+        condition: service_started
+        required: true
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 5081:80/tcp # HTTP
+    dns:
+      - 172.18.0.100
+
 networks:
   traefik:
     external: true
