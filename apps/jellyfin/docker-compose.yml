@@ -39,13 +39,8 @@ services:
       - /opt/vc/lib:/opt/vc/lib
       - /media:/media:rslave
       - /mnt:/mnt:rslave
-    # devices:
-      # - /dev/dri:/dev/dri
-      # - /dev/vcsm:/dev/vcsm
-      # - /dev/vchiq:/dev/vchiq
-      # - /dev/video10:/dev/video10
-      # - /dev/video11:/dev/video11
-      # - /dev/video12:/dev/video12
+    devices:
+      - /dev/dri:/dev/dri
     dns:
       - 172.18.0.100
 
