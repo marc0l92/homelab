@@ -3,9 +3,23 @@ services:
   app:
     container_name: jellyseerr
     image: fallenbagel/jellyseerr:latest
-    network_mode: bridge
     restart: unless-stopped
-    hostname: Jellyseerr
+    hostname: jellyseerr
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.jellyseerr.loadbalancer.server.port: "80"
+
+      traefik.http.routers.jellyseerr-duckdns-local.rule: Host(`jellyseerr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.jellyseerr-duckdns-local.entrypoints: https
+      traefik.http.routers.jellyseerr-duckdns-local.tls: true
+      traefik.http.routers.jellyseerr-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.jellyseerr-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.jellyseerr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.jellyseerr-local.rule: Host(`jellyseerr.l.lucarotto.it`)
+      traefik.http.routers.jellyseerr-local.entrypoints: http
     environment:
       LOG_LEVEL: info
       PGID: "1000"
@@ -15,3 +29,7 @@ services:
       - 5055:5055/tcp
     volumes:
       - /DATA/AppData/jellyseerr/config:/app/config
+
+networks:
+  traefik:
+    external: true

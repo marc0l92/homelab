@@ -3,9 +3,23 @@ services:
   metube:
     container_name: metube
     image: ghcr.io/alexta69/metube:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: metube
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.metube.loadbalancer.server.port: "80"
+
+      traefik.http.routers.metube-duckdns-local.rule: Host(`metube.lucarotto-local.duckdns.org`)
+      traefik.http.routers.metube-duckdns-local.entrypoints: https
+      traefik.http.routers.metube-duckdns-local.tls: true
+      traefik.http.routers.metube-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.metube-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.metube-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.metube-local.rule: Host(`metube.l.lucarotto.it`)
+      traefik.http.routers.metube-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -14,3 +28,7 @@ services:
       - 8081:8081/tcp
     volumes:
       - /DATA/Downloads/metube:/downloads
+
+networks:
+  traefik:
+    external: true

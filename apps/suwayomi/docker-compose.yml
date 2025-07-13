@@ -4,8 +4,22 @@ services:
     container_name: suwayomi
     image: ghcr.io/suwayomi/tachidesk:latest
     restart: unless-stopped
-    network_mode: bridge
     hostname: suwayomi
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.suwayomi.loadbalancer.server.port: "4567"
+
+      traefik.http.routers.suwayomi-duckdns-local.rule: Host(`suwayomi.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+      traefik.http.routers.suwayomi-duckdns-local.entrypoints: https
+      traefik.http.routers.suwayomi-duckdns-local.tls: true
+      traefik.http.routers.suwayomi-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.suwayomi-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.suwayomi-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.suwayomi-local.rule: Host(`suwayomi.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
+      traefik.http.routers.suwayomi-local.entrypoints: http
     environment:
       BIND_IP: 0.0.0.0
       PGID: "1000"
@@ -15,3 +29,7 @@ services:
       - 4567:4567/tcp
     volumes:
       - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
+
+networks:
+  traefik:
+    external: true

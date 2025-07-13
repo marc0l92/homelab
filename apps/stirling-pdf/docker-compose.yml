@@ -3,9 +3,23 @@ services:
   stirling-pdf:
     container_name: stirling-pdf
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: stirling-pdf
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.stirling-pdf.loadbalancer.server.port: "8080"
+
+      traefik.http.routers.stirling-pdf-duckdns-local.rule: Host(`stirling-pdf.lucarotto-local.duckdns.org`)
+      traefik.http.routers.stirling-pdf-duckdns-local.entrypoints: https
+      traefik.http.routers.stirling-pdf-duckdns-local.tls: true
+      traefik.http.routers.stirling-pdf-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.stirling-pdf-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.stirling-pdf-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.stirling-pdf-local.rule: Host(`stirling-pdf.l.lucarotto.it`)
+      traefik.http.routers.stirling-pdf-local.entrypoints: http
     environment:
       DOCKER_ENABLE_SECURITY: false
       LANGS: en_US
@@ -18,5 +32,8 @@ services:
       - /DATA/AppData/stirling-pdf/trainingData:/usr/share/tessdata # Required for extra OCR languages
       - /DATA/AppData/stirling-pdf/extraConfigs:/configs
       - /DATA/AppData/stirling-pdf/customFiles:/customFiles/
-      # - /DATA/AppData/stirling-pdf/logs:/logs/
       - /DATA/AppData/stirling-pdf/pipeline:/pipeline/
+
+networks:
+  traefik:
+    external: true

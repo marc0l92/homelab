@@ -3,11 +3,25 @@ services:
   homepage:
     container_name: homepage
     image: ghcr.io/gethomepage/homepage:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: homepage
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.homepage.loadbalancer.server.port: "3000"
+
+      traefik.http.routers.homepage-duckdns-local.rule: Host(`homepage.lucarotto-local.duckdns.org`)
+      traefik.http.routers.homepage-duckdns-local.entrypoints: https
+      traefik.http.routers.homepage-duckdns-local.tls: true
+      traefik.http.routers.homepage-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.homepage-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.homepage-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.homepage-local.rule: Host(`homepage.l.lucarotto.it`) || Host(`l.lucarotto.it`)
+      traefik.http.routers.homepage-local.entrypoints: http
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.local,homepage.lucarotto-local.duckdns.org,homepage.lucarotto.duckdns.org
+      HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.local,homepage.lucarotto-local.duckdns.org,homepage.lucarotto.duckdns.org,homepage.l.lucarotto.it,l.lucarotto.it
       # PGID: "1000" # Root permission needed to access Docker socket
       # PUID: "1000"
       TZ: Etc/UTC
@@ -18,3 +32,7 @@ services:
       - /DATA/AppData/homepage/icons:/app/public/icons
       - /DATA/AppData/homepage/images:/app/public/images
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  traefik:
+    external: true

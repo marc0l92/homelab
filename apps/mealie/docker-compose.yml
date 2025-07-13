@@ -6,13 +6,32 @@ services:
     network_mode: bridge
     restart: unless-stopped
     hostname: mealie
-    ports:
-      - 9925:9000/tcp
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.mealie.loadbalancer.server.port: "9000"
+
+      traefik.http.routers.mealie-duckdns-local.rule: Host(`mealie.lucarotto-local.duckdns.org`)
+      traefik.http.routers.mealie-duckdns-local.entrypoints: https
+      traefik.http.routers.mealie-duckdns-local.tls: true
+      traefik.http.routers.mealie-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.mealie-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.mealie-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.mealie-local.rule: Host(`mealie.l.lucarotto.it`)
+      traefik.http.routers.mealie-local.entrypoints: http
     environment:
       ALLOW_SIGNUP: "true"
       BASE_URL: https://mealie.lucarotto.duckdns.org
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
+    ports:
+      - 9925:9000/tcp
     volumes:
-      - /DATA/AppData/mealie:/app/data/
+      - /DATA/AppData/mealie:/app/data
+
+networks:
+  traefik:
+    external: true

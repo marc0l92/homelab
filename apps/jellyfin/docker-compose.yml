@@ -3,18 +3,32 @@ services:
   jellyfin:
     container_name: jellyfin
     image: linuxserver/jellyfin:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: jellyfin
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.jellyfin.loadbalancer.server.port: "8096"
+
+      traefik.http.routers.jellyfin-duckdns-local.rule: Host(`jellyfin.lucarotto-local.duckdns.org`)
+      traefik.http.routers.jellyfin-duckdns-local.entrypoints: https
+      traefik.http.routers.jellyfin-duckdns-local.tls: true
+      traefik.http.routers.jellyfin-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.jellyfin-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.jellyfin-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.jellyfin-local.rule: Host(`jellyfin.l.lucarotto.it`)
+      traefik.http.routers.jellyfin-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 8096:8096/tcp
-      - 8920:8920/tcp
-      - 7359:7359/tcp
-      - 1900:1900/tcp
+      - 8096:8096/tcp # HTTP
+      - 8920:8920/tcp # HTTPS
+      - 7359:7359/udp # Zeroconf 
+      - 1900:1900/tcp # UPnP
     volumes:
       - /DATA/AppData/jellyfin/config:/config
       - /DATA:/DATA
@@ -28,3 +42,7 @@ services:
       # - /dev/video10:/dev/video10
       # - /dev/video11:/dev/video11
       # - /dev/video12:/dev/video12
+
+networks:
+  traefik:
+    external: true

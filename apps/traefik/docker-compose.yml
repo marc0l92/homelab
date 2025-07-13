@@ -3,10 +3,23 @@ services:
   traefik:
     container_name: traefik
     image: traefik:v3
-    networks:
-      - traefik
     restart: unless-stopped
     hostname: traefik
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.traefik.loadbalancer.server.port: "8080"
+
+      traefik.http.routers.traefik-duckdns-local.rule: Host(`traefik.lucarotto-local.duckdns.org`)
+      traefik.http.routers.traefik-duckdns-local.entrypoints: https
+      traefik.http.routers.traefik-duckdns-local.tls: true
+      traefik.http.routers.traefik-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.traefik-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.traefik-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.traefik-local.rule: Host(`traefik.l.lucarotto.it`)
+      traefik.http.routers.traefik-local.entrypoints: http
     environment:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
       DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
@@ -18,7 +31,7 @@ services:
       - 3380:80/udp
       - 3443:443/tcp
       - 3443:443/udp
-      - 1180:8080/tcp
+      - 1180:8080/tcp # Traefik Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro

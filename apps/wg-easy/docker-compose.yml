@@ -3,9 +3,23 @@ services:
   wg-easy:
     container_name: wg-easy
     image: ghcr.io/wg-easy/wg-easy:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: wg-easy
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.wg-easy.loadbalancer.server.port: "51821"
+
+      traefik.http.routers.wg-easy-duckdns-local.rule: Host(`wg-easy.lucarotto-local.duckdns.org`)
+      traefik.http.routers.wg-easy-duckdns-local.entrypoints: https
+      traefik.http.routers.wg-easy-duckdns-local.tls: true
+      traefik.http.routers.wg-easy-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.wg-easy-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.wg-easy-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.wg-easy-local.rule: Host(`wg-easy.l.lucarotto.it`)
+      traefik.http.routers.wg-easy-local.entrypoints: http
     environment:
       PASSWORD_HASH: ${PASSWORD_HASH}
       WG_DEFAULT_DNS: 192.168.5.201
@@ -15,8 +29,8 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 51820:51820/udp
-      - 51821:51821/tcp
+      - 51820:51820/udp # WireGuard
+      - 51821:51821/tcp # Web UI
     volumes:
       - /DATA/AppData/wg-easy/wireguard/etc/wireguard
     cap_add:
@@ -30,3 +44,7 @@ services:
         required: true
       - path: ../../stack.env
         required: false
+
+networks:
+  traefik:
+    external: true

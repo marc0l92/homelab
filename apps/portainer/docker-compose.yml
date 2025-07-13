@@ -2,18 +2,36 @@ name: portainer
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ce:2.30.1
-    network_mode: bridge
+    image: portainer/portainer-ce:latest
     restart: unless-stopped
     hostname: portainer
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.portainer.loadbalancer.server.port: "9000"
+
+      traefik.http.routers.portainer-duckdns-local.rule: Host(`portainer.lucarotto-local.duckdns.org`)
+      traefik.http.routers.portainer-duckdns-local.entrypoints: https
+      traefik.http.routers.portainer-duckdns-local.tls: true
+      traefik.http.routers.portainer-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.portainer-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.portainer-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.portainer-local.rule: Host(`portainer.l.lucarotto.it`)
+      traefik.http.routers.portainer-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
     ports:
-      - 8000:8000/tcp
-      - 9000:9000/tcp
-      - 9443:9443/tcp
+      # - 8000:8000/tcp # Portainer Agent
+      - 9000:9000/tcp # Portainer UI
+      # - 9443:9443/tcp # Portainer HTTPS UI
     volumes:
       - /DATA/AppData/portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  traefik:
+    external: true

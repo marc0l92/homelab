@@ -3,9 +3,23 @@ services:
   vaultwarden:
     container_name: vaultwarden
     image: vaultwarden/server:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: vaultwarden
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.vaultwarden.loadbalancer.server.port: "80"
+
+      traefik.http.routers.vaultwarden-duckdns-local.rule: Host(`vaultwarden.lucarotto-local.duckdns.org`)
+      traefik.http.routers.vaultwarden-duckdns-local.entrypoints: https
+      traefik.http.routers.vaultwarden-duckdns-local.tls: true
+      traefik.http.routers.vaultwarden-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.vaultwarden-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.vaultwarden-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.vaultwarden-local.rule: Host(`vaultwarden.l.lucarotto.it`)
+      traefik.http.routers.vaultwarden-local.entrypoints: http
     environment:
       DOMAIN: https://vaultwarden.lucarotto-local.duckdns.org
       ADMIN_TOKEN: ${ADMIN_TOKEN}
@@ -21,3 +35,7 @@ services:
         required: true
       - path: ../../stack.env
         required: false
+
+networks:
+  traefik:
+    external: true

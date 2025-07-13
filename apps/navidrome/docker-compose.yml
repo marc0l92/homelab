@@ -3,9 +3,23 @@ services:
   navidrome:
     container_name: navidrome
     image: deluan/navidrome:latest
-    network_mode: bridge
     restart: unless-stopped
     hostname: navidrome
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.navidrome.loadbalancer.server.port: "4533"
+
+      traefik.http.routers.navidrome-duckdns-local.rule: Host(`navidrome.lucarotto-local.duckdns.org`)
+      traefik.http.routers.navidrome-duckdns-local.entrypoints: https
+      traefik.http.routers.navidrome-duckdns-local.tls: true
+      traefik.http.routers.navidrome-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.navidrome-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.navidrome-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.navidrome-local.rule: Host(`navidrome.l.lucarotto.it`)
+      traefik.http.routers.navidrome-local.entrypoints: http
     environment:
       ND_BASEURL: ""
       ND_LOGLEVEL: info
@@ -19,3 +33,7 @@ services:
     volumes:
       - /DATA/AppData/navidrome/data:/data
       - /DATA/Media/Music:/music
+
+networks:
+  traefik:
+    external: true
