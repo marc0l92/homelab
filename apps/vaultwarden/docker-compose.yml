@@ -25,7 +25,6 @@ services:
       traefik.http.routers.vaultwarden-internet.entrypoints: https-internet
       traefik.http.routers.vaultwarden-internet.tls: true
       traefik.http.routers.vaultwarden-internet.tls.certresolver: lucarotto-http
-      traefik.http.routers.vaultwarden-internet.tls.domains[0].main: password.lucarotto.it
     environment:
       DOMAIN: https://vaultwarden.lucarotto-local.duckdns.org
       ADMIN_TOKEN: ${ADMIN_TOKEN}
