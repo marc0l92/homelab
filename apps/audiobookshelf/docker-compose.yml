@@ -24,7 +24,7 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
+    ports: []
       # Disabled in favor of Traefik routing
       # - 1080:80/tcp
     volumes:
