@@ -43,7 +43,6 @@ services:
       # Admin Panel
       - 3002:80/tcp
       - 3003:443/tcp
-      - 3003:443/udp
 
       # DNS Over TLS
       - 853:853/tcp
