@@ -9,7 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.jellyseerr.loadbalancer.server.port: "80"
+      traefik.http.services.jellyseerr.loadbalancer.server.port: "5055"
 
       traefik.http.routers.jellyseerr-duckdns-local.rule: Host(`jellyseerr.lucarotto-local.duckdns.org`)
       traefik.http.routers.jellyseerr-duckdns-local.entrypoints: https
@@ -25,8 +25,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 5055:5055/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 5055:5055/tcp
     volumes:
       - /DATA/AppData/jellyseerr/config:/app/config
     dns:

@@ -27,8 +27,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 9925:9000/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 9925:9000/tcp
     volumes:
       - /DATA/AppData/mealie:/app/data
     dns:

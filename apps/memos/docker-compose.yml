@@ -9,7 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.memos.loadbalancer.server.port: "80"
+      traefik.http.services.memos.loadbalancer.server.port: "5230"
 
       traefik.http.routers.memos-duckdns-local.rule: Host(`memos.lucarotto-local.duckdns.org`)
       traefik.http.routers.memos-duckdns-local.entrypoints: https
@@ -24,8 +24,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 5230:5230/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 5230:5230/tcp
     volumes:
       - /DATA/AppData/memos/memos:/var/opt/memos
     dns:
