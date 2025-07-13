@@ -4,27 +4,8 @@ services:
     container_name: microsocks
     image: ghcr.io/httptoolkit/docker-socks-tunnel:latest
     restart: unless-stopped
+    network_mode: bridge
     hostname: microsocks
-    networks:
-      - traefik
-    labels:
-      traefik.enable: true
-      traefik.tcp.services.microsocks.loadbalancer.server.port: "1080"
-
-      traefik.tcp.routers.microsocks-duckdns-local.rule: HostSNI(`microsocks.lucarotto-local.duckdns.org`)
-      traefik.tcp.routers.microsocks-duckdns-local.entrypoints: https
-      traefik.tcp.routers.microsocks-duckdns-local.tls: true
-      traefik.tcp.routers.microsocks-duckdns-local.tls.certresolver: duckdns
-      traefik.tcp.routers.microsocks-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.tcp.routers.microsocks-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
-
-      traefik.tcp.routers.microsocks-local.rule: Host(`microsocks.l.lucarotto.it`)
-      traefik.tcp.routers.microsocks-local.entrypoints: http
-
-      traefik.tcp.routers.immich-internet.rule: HostSNI(`socks5.lucarotto.it`)
-      traefik.tcp.routers.immich-internet.entrypoints: https-internet
-      traefik.tcp.routers.immich-internet.tls: true
-      traefik.tcp.routers.immich-internet.tls.certresolver: lucarotto-http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -35,7 +16,3 @@ services:
       - 8889:1080/tcp
     dns:
       - 172.18.0.100
-
-networks:
-  traefik:
-    external: true
