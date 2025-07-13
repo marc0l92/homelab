@@ -18,7 +18,7 @@ services:
       traefik.tcp.routers.microsocks-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
       traefik.tcp.routers.microsocks-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.tcp.routers.microsocks-local.rule: HostSNI(`microsocks.l.lucarotto.it`)
+      traefik.tcp.routers.microsocks-local.rule: Host(`microsocks.l.lucarotto.it`)
       traefik.tcp.routers.microsocks-local.entrypoints: http
 
       traefik.tcp.routers.immich-internet.rule: HostSNI(`socks5.lucarotto.it`)
