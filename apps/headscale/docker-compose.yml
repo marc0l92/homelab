@@ -22,12 +22,12 @@ services:
       traefik.http.routers.headscale-local.rule: Host(`headscale.l.lucarotto.it`)
       traefik.http.routers.headscale-local.entrypoints: http
 
-      traefik.http.routers.vaultwarden-internet.rule: Host(`headscale.lucarotto.it`)
-      traefik.http.routers.vaultwarden-internet.entrypoints: https-internet
-      traefik.http.routers.vaultwarden-internet.tls: true
-      traefik.http.routers.vaultwarden-internet.tls.certresolver: lucarotto-http
-      traefik.http.routers.vaultwarden-internet.tls.domains[0].main: lucarotto.it
-      traefik.http.routers.vaultwarden-internet.tls.domains[0].sans: "*.lucarotto.it"
+      traefik.http.routers.headscale-internet.rule: Host(`headscale.lucarotto.it`)
+      traefik.http.routers.headscale-internet.entrypoints: https-internet
+      traefik.http.routers.headscale-internet.tls: true
+      traefik.http.routers.headscale-internet.tls.certresolver: lucarotto-http
+      traefik.http.routers.headscale-internet.tls.domains[0].main: lucarotto.it
+      traefik.http.routers.headscale-internet.tls.domains[0].sans: "*.lucarotto.it"
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -68,9 +68,9 @@ services:
       PUID: "1000"
       TZ: Etc/UTC
     ports: []
-    # Disabled in favor of Traefik routing
-    # - 5080:8080/tcp # HTTP
-    # - 5443:8443/tcp # HTTPS
+      # Disabled in favor of Traefik routing
+      # - 5080:8080/tcp # HTTP
+      # - 5443:8443/tcp # HTTPS
     dns:
       - 172.18.0.100
 
