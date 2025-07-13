@@ -25,8 +25,9 @@ services:
       PUID: "1000"
       DEFAULT_WORKSPACE: /DATA/AppData
       TZ: Etc/UTC
-    ports:
-      - 8087:8443/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8087:8443/tcp
     volumes:
       - /DATA/AppData/code-server/config:/config
       - /DATA/AppData/code-server/projects:/projects

@@ -27,8 +27,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 8041:8080/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8041:8080/tcp
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/dozzle:/data
