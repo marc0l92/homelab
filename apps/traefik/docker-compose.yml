@@ -38,7 +38,7 @@ services:
       - 2443:2443/tcp
       - 2443:2443/udp
       # Traefik Dashboard
-      - 1180:8080/tcp
+      # - 1180:8080/tcp # Disabled in favor of Traefik routing
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro

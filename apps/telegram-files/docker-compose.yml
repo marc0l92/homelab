@@ -29,8 +29,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 7745:80/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 7745:80/tcp
     volumes:
       - /DATA/AppData/telegram-files:/app/data
     dns:

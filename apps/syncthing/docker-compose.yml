@@ -9,7 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.syncthing-local.loadbalancer.server.port: "80"
+      traefik.http.services.syncthing-local.loadbalancer.server.port: "8384"
 
       traefik.http.routers.syncthing-local-duckdns-local.rule: Host(`syncthing-local.lucarotto-local.duckdns.org`)
       traefik.http.routers.syncthing-local-duckdns-local.entrypoints: https
@@ -33,11 +33,12 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 8385:8384/tcp
-      - 22001:22000/tcp
-      - 22001:22000/udp
-      - 21028:21027/udp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8385:8384/tcp # Syncthing Web UI
+      # - 22001:22000/tcp # Syncthing Sync Protocol
+      # - 22001:22000/udp # Syncthing Sync Protocol
+      # - 21028:21027/udp # Syncthing Local Discovery
     volumes:
       - /DATA/AppData/syncthing-local/config:/config
       - /DATA:/DATA
@@ -69,7 +70,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.syncthing-remote.loadbalancer.server.port: "80"
+      traefik.http.services.syncthing-remote.loadbalancer.server.port: "8384"
 
       traefik.http.routers.syncthing-remote-duckdns-local.rule: Host(`syncthing-remote.lucarotto-local.duckdns.org`)
       traefik.http.routers.syncthing-remote-duckdns-local.entrypoints: https
@@ -93,11 +94,12 @@ services:
       PUID: "1000"
       PGID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 8384:8384/tcp
-      - 22000:22000/tcp
-      - 22000:22000/udp
-      - 21027:21027/udp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8384:8384/tcp # Syncthing Web UI
+      # - 22000:22000/tcp # Syncthing Sync Protocol
+      # - 22000:22000/udp # Syncthing Sync Protocol
+      # - 21027:21027/udp # Syncthing Local Discovery
     volumes:
       - /DATA/AppData/syncthing-remote/config:/config
       - /mnt:/mnt:rslave

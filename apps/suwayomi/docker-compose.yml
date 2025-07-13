@@ -25,8 +25,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 4567:4567/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 4567:4567/tcp
     volumes:
       - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
     dns:

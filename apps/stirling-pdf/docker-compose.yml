@@ -26,8 +26,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 8042:8080/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8042:8080/tcp
     volumes:
       - /DATA/AppData/stirling-pdf/trainingData:/usr/share/tessdata # Required for extra OCR languages
       - /DATA/AppData/stirling-pdf/extraConfigs:/configs

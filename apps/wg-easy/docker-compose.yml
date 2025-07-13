@@ -30,7 +30,7 @@ services:
       TZ: Etc/UTC
     ports:
       - 51820:51820/udp # WireGuard
-      - 51821:51821/tcp # Web UI
+      # - 51821:51821/tcp # Web UI # Disabled in favor of Traefik routing
     volumes:
       - /DATA/AppData/wg-easy/wireguard/etc/wireguard
     cap_add:

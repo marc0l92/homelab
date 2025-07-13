@@ -9,7 +9,7 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.tailscale.loadbalancer.server.port: "80"
+      traefik.http.services.tailscale.loadbalancer.server.port: "5252"
 
       traefik.http.routers.tailscale-duckdns-local.rule: Host(`tailscale.lucarotto-local.duckdns.org`)
       traefik.http.routers.tailscale-duckdns-local.entrypoints: https
@@ -29,8 +29,9 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports:
-      - 5252:5252/tcp
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 5252:5252/tcp
     volumes:
       - /DATA/AppData/tailscale/state:/var/lib/tailscale
     devices:

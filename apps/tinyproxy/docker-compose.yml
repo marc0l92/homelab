@@ -4,22 +4,8 @@ services:
     container_name: tinyproxy
     image: ajoergensen/tinyproxy:latest
     restart: unless-stopped
+    network_mode: bridge
     hostname: tinyproxy
-    networks:
-      - traefik
-    labels:
-      traefik.enable: true
-      traefik.http.services.tinyproxy.loadbalancer.server.port: "8888"
-
-      traefik.http.routers.tinyproxy-duckdns-local.rule: Host(`tinyproxy.lucarotto-local.duckdns.org`)
-      traefik.http.routers.tinyproxy-duckdns-local.entrypoints: https
-      traefik.http.routers.tinyproxy-duckdns-local.tls: true
-      traefik.http.routers.tinyproxy-duckdns-local.tls.certresolver: duckdns
-      traefik.http.routers.tinyproxy-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.http.routers.tinyproxy-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
-
-      traefik.http.routers.tinyproxy-local.rule: Host(`tinyproxy.l.lucarotto.it`)
-      traefik.http.routers.tinyproxy-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
@@ -28,7 +14,3 @@ services:
       - 8888:8888/tcp
     volumes:
       - /DATA/AppData/tinyproxy:/etc/tinyproxy
-
-networks:
-  traefik:
-    external: true
