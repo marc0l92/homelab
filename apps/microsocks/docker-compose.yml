@@ -9,22 +9,22 @@ services:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.microsocks.loadbalancer.server.port: "1080"
+      traefik.tcp.services.microsocks.loadbalancer.server.port: "1080"
 
-      traefik.http.routers.microsocks-duckdns-local.rule: Host(`microsocks.lucarotto-local.duckdns.org`)
-      traefik.http.routers.microsocks-duckdns-local.entrypoints: https
-      traefik.http.routers.microsocks-duckdns-local.tls: true
-      traefik.http.routers.microsocks-duckdns-local.tls.certresolver: duckdns
-      traefik.http.routers.microsocks-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.http.routers.microsocks-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+      traefik.tcp.routers.microsocks-duckdns-local.rule: HostSNI(`microsocks.lucarotto-local.duckdns.org`)
+      traefik.tcp.routers.microsocks-duckdns-local.entrypoints: https
+      traefik.tcp.routers.microsocks-duckdns-local.tls: true
+      traefik.tcp.routers.microsocks-duckdns-local.tls.certresolver: duckdns
+      traefik.tcp.routers.microsocks-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.tcp.routers.microsocks-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.http.routers.microsocks-local.rule: Host(`microsocks.l.lucarotto.it`)
-      traefik.http.routers.microsocks-local.entrypoints: http
+      traefik.tcp.routers.microsocks-local.rule: HostSNI(`microsocks.l.lucarotto.it`)
+      traefik.tcp.routers.microsocks-local.entrypoints: http
 
-      traefik.http.routers.immich-internet.rule: Host(`socks5.lucarotto.it`)
-      traefik.http.routers.immich-internet.entrypoints: https-internet
-      traefik.http.routers.immich-internet.tls: true
-      traefik.http.routers.immich-internet.tls.certresolver: lucarotto-http
+      traefik.tcp.routers.immich-internet.rule: HostSNI(`socks5.lucarotto.it`)
+      traefik.tcp.routers.immich-internet.entrypoints: https-internet
+      traefik.tcp.routers.immich-internet.tls: true
+      traefik.tcp.routers.immich-internet.tls.certresolver: lucarotto-http
     environment:
       PGID: "1000"
       PUID: "1000"
