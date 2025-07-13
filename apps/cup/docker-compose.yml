@@ -32,6 +32,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/cup:/config
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:

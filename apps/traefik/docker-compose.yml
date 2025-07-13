@@ -54,5 +54,8 @@ networks:
   traefik:
     name: traefik
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
     driver_opts:
       com.docker.network.bridge.enable_ip_masquerade: "true"

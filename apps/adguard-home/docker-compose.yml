@@ -12,7 +12,8 @@ services:
       - -w
       - /opt/adguardhome/work
     networks:
-      - traefik
+      traefik:
+        ipv4_address: 172.18.0.100
     labels:
       traefik.enable: true
       traefik.http.services.adguard.loadbalancer.server.port: "80"
