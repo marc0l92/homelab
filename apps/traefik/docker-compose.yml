@@ -57,3 +57,6 @@ networks:
   traefik:
     name: traefik
     driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "true"
+0
