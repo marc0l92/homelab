@@ -28,11 +28,10 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-    ports: []
-      # Disabled in favor of Traefik routing
-      # - 8096:8096/tcp # HTTP
-      # - 8920:8920/tcp # HTTPS
-      # - 7359:7359/udp # Zeroconf
+    ports:
+      - 8096:8096/tcp # HTTP
+      - 8920:8920/tcp # HTTPS
+      - 7359:7359/udp # Zeroconf
     volumes:
       - /DATA/AppData/jellyfin/config:/config
       - /etc/localtime:/etc/localtime:ro
