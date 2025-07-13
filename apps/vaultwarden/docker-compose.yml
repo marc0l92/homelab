@@ -35,8 +35,9 @@ services:
       TZ: Etc/UTC
     volumes:
       - /DATA/AppData/vaultwarden:/data
-    ports:
-      - 8022:80
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8022:80
     env_file:
       - path: .env
         required: true
