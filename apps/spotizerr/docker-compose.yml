@@ -43,7 +43,7 @@ services:
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     depends_on:
-      - redis
+      - spotizerr-redis
     env_file:
       - path: .env
         required: true
