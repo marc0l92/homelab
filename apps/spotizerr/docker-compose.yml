@@ -22,7 +22,7 @@ services:
       traefik.http.routers.spotizerr-local.rule: Host(`spotizerr.l.lucarotto.it`)
       traefik.http.routers.spotizerr-local.entrypoints: http
     environment:
-      UMASK: 0022 # Optional: Sets the default file permissions for newly created files within the container.
+      UMASK: 022 # Optional: Sets the default file permissions for newly created files within the container.
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_DB: ${REDIS_DB}
