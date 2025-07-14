@@ -27,6 +27,7 @@ services:
       traefik.http.services.readarr.loadbalancer.server.port: "8787"
 
       traefik.http.routers.qbittorrent-duckdns-local.rule: Host(`qbittorrent.lucarotto-local.duckdns.org`)
+      traefik.http.routers.qbittorrent-duckdns-local.service: qbittorrent
       traefik.http.routers.qbittorrent-duckdns-local.entrypoints: https
       traefik.http.routers.qbittorrent-duckdns-local.tls: true
       traefik.http.routers.qbittorrent-duckdns-local.tls.certresolver: duckdns
@@ -34,6 +35,7 @@ services:
       traefik.http.routers.qbittorrent-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.nzbget-duckdns-local.rule: Host(`nzbget.lucarotto-local.duckdns.org`)
+      traefik.http.routers.nzbget-duckdns-local.service: nzbget
       traefik.http.routers.nzbget-duckdns-local.entrypoints: https
       traefik.http.routers.nzbget-duckdns-local.tls: true
       traefik.http.routers.nzbget-duckdns-local.tls.certresolver: duckdns
@@ -41,6 +43,7 @@ services:
       traefik.http.routers.nzbget-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.prowlarr-duckdns-local.rule: Host(`prowlarr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.prowlarr-duckdns-local.service: prowlarr
       traefik.http.routers.prowlarr-duckdns-local.entrypoints: https
       traefik.http.routers.prowlarr-duckdns-local.tls: true
       traefik.http.routers.prowlarr-duckdns-local.tls.certresolver: duckdns
@@ -48,6 +51,7 @@ services:
       traefik.http.routers.prowlarr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.radarr-duckdns-local.rule: Host(`radarr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.radarr-duckdns-local.service: radarr
       traefik.http.routers.radarr-duckdns-local.entrypoints: https
       traefik.http.routers.radarr-duckdns-local.tls: true
       traefik.http.routers.radarr-duckdns-local.tls.certresolver: duckdns
@@ -55,6 +59,7 @@ services:
       traefik.http.routers.radarr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.sonarr-duckdns-local.rule: Host(`sonarr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.sonarr-duckdns-local.service: sonarr
       traefik.http.routers.sonarr-duckdns-local.entrypoints: https
       traefik.http.routers.sonarr-duckdns-local.tls: true
       traefik.http.routers.sonarr-duckdns-local.tls.certresolver: duckdns
@@ -62,6 +67,7 @@ services:
       traefik.http.routers.sonarr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.lidarr-duckdns-local.rule: Host(`lidarr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.lidarr-duckdns-local.service: lidarr
       traefik.http.routers.lidarr-duckdns-local.entrypoints: https
       traefik.http.routers.lidarr-duckdns-local.tls: true
       traefik.http.routers.lidarr-duckdns-local.tls.certresolver: duckdns
@@ -69,6 +75,7 @@ services:
       traefik.http.routers.lidarr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.bazarr-duckdns-local.rule: Host(`bazarr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.bazarr-duckdns-local.service: bazarr
       traefik.http.routers.bazarr-duckdns-local.entrypoints: https
       traefik.http.routers.bazarr-duckdns-local.tls: true
       traefik.http.routers.bazarr-duckdns-local.tls.certresolver: duckdns
@@ -76,6 +83,7 @@ services:
       traefik.http.routers.bazarr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.mylar-duckdns-local.rule: Host(`mylar.lucarotto-local.duckdns.org`)
+      traefik.http.routers.mylar-duckdns-local.service: mylar
       traefik.http.routers.mylar-duckdns-local.entrypoints: https
       traefik.http.routers.mylar-duckdns-local.tls: true
       traefik.http.routers.mylar-duckdns-local.tls.certresolver: duckdns
@@ -83,6 +91,7 @@ services:
       traefik.http.routers.mylar-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
       traefik.http.routers.readarr-duckdns-local.rule: Host(`readarr.lucarotto-local.duckdns.org`)
+      traefik.http.routers.readarr-duckdns-local.service: readarr
       traefik.http.routers.readarr-duckdns-local.entrypoints: https
       traefik.http.routers.readarr-duckdns-local.tls: true
       traefik.http.routers.readarr-duckdns-local.tls.certresolver: duckdns
