@@ -30,7 +30,7 @@ services:
       # - 4567:4567/tcp
     volumes:
       - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
-      - /DATA/Downloads/manga:/downloads
+      - /DATA/Downloads/suwayomi:/downloads
       - /etc/localtime:/etc/localtime:ro
     dns:
       - 172.18.0.100
