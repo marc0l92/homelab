@@ -31,11 +31,6 @@ services:
     volumes:
       - /DATA/Downloads/manga:/home/suwayomi/.local/share/Tachidesk/downloads/mangas
       - /DATA/AppData/suwayomi/backups:/home/suwayomi/.local/share/Tachidesk/backups
-      - /DATA/AppData/suwayomi/settings:/home/suwayomi/.local/share/Tachidesk/settings
-      - /DATA/AppData/suwayomi/extensions:/home/suwayomi/.local/share/Tachidesk/extensions
-      - /DATA/AppData/suwayomi/databases/database.mv.db:/home/suwayomi/.local/share/Tachidesk/database.mv.db
-      - /DATA/AppData/suwayomi/databases/database.trace.db:/home/suwayomi/.local/share/Tachidesk/database.trace.db
-      - /DATA/AppData/suwayomi/server.conf:/home/suwayomi/.local/share/Tachidesk/server.conf
       - /etc/localtime:/etc/localtime:ro
     dns:
       - 172.18.0.100
