@@ -29,9 +29,8 @@ services:
       # Disabled in favor of Traefik routing
       # - 4567:4567/tcp
     volumes:
-      - /DATA/Downloads/manga:/home/suwayomi/.local/share/Tachidesk/downloads/mangas
-      - /DATA/AppData/suwayomi/backups:/home/suwayomi/.local/share/Tachidesk/backups
-      - suwayomi:/home/suwayomi/.local/share/Tachidesk
+      - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
+      - /DATA/Downloads/manga:/downloads
       - /etc/localtime:/etc/localtime:ro
     dns:
       - 172.18.0.100
@@ -71,9 +70,6 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Etc/UTC
-
-volumes:
-  suwayomi: {}
 
 networks:
   traefik:
