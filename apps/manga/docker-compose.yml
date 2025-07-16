@@ -55,19 +55,21 @@ services:
 
       traefik.http.routers.kavita-local.rule: Host(`kavita.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
       traefik.http.routers.kavita-local.entrypoints: http
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 5000:5000
     volumes:
       - /DATA/AppData/kavita/config:/kavita/config
       - /DATA/Downloads/suwayomi:/data/suwayomi
       - /media:/media:rslave
       - /mnt:/mnt:rslave
       - /etc/localtime:/etc/localtime:ro
-    ports: []
-      # Disabled in favor of Traefik routing
-      # - 5000:5000
-    environment:
-      PGID: "1000"
-      PUID: "1000"
-      TZ: Etc/UTC
+    dns:
+      - 172.18.0.100
 
 networks:
   traefik:
