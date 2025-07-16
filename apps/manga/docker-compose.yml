@@ -35,40 +35,6 @@ services:
     dns:
       - 172.18.0.100
 
-  komga:
-    container_name: komga
-    image: gotson/komga:latest
-    restart: unless-stopped
-    hostname: komga
-    networks:
-      - traefik
-    labels:
-      traefik.enable: true
-      traefik.http.services.komga.loadbalancer.server.port: "25600"
-
-      traefik.http.routers.komga-duckdns-local.rule: Host(`komga.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
-      traefik.http.routers.komga-duckdns-local.entrypoints: https
-      traefik.http.routers.komga-duckdns-local.tls: true
-      traefik.http.routers.komga-duckdns-local.tls.certresolver: duckdns
-      traefik.http.routers.komga-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.http.routers.komga-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
-
-      traefik.http.routers.komga-local.rule: Host(`komga.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
-      traefik.http.routers.komga-local.entrypoints: http
-    volumes:
-      - /DATA/AppData/komga/config:/config
-      - /DATA/Downloads/suwayomi:/data/suwayomi
-      - /media:/media:rslave
-      - /mnt:/mnt:rslave
-      - /etc/localtime:/etc/localtime:ro
-    ports: []
-      # Disabled in favor of Traefik routing
-      # - 25600:25600
-    environment:
-      PGID: "1000"
-      PUID: "1000"
-      TZ: Etc/UTC
-
   kavita:
     container_name: kavita
     image: jvmilazz0/kavita:latest
