@@ -29,6 +29,7 @@ services:
       # Disabled in favor of Traefik routing
       # - 4567:4567/tcp
     volumes:
+      - /DATA/Downloads/manga:/home/suwayomi/.local/share/Tachidesk/downloads/mangas
       - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
       - /etc/localtime:/etc/localtime:ro
     dns:
