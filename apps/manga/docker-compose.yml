@@ -1,4 +1,4 @@
-name: suwayomi
+name: manga
 services:
   suwayomi:
     container_name: suwayomi
@@ -30,8 +30,45 @@ services:
       # - 4567:4567/tcp
     volumes:
       - /DATA/AppData/suwayomi:/home/suwayomi/.local/share/Tachidesk
+      - /etc/localtime:/etc/localtime:ro
     dns:
       - 172.18.0.100
+
+  komga:
+    container_name: komga
+    image: gotson/komga:latest
+    restart: unless-stopped
+    hostname: komga
+    networks:
+      - traefik
+    volumes:
+      - /DATA/AppData/komga/config:/config
+      - /DATA/AppData/komga/data:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 25600:25600
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
+
+  kavita:
+    container_name: kavita
+    image: jvmilazz0/kavita:latest
+    restart: unless-stopped
+    hostname: kavita
+    networks:
+      - traefik
+    volumes:
+      - /DATA/AppData/kavita/config:/kavita/config
+      - /DATA/AppData/kavita/data:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 5000:5000
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Etc/UTC
 
 networks:
   traefik:
