@@ -14,5 +14,3 @@ services:
       - '"/usr/local/bin/microsocks" -b 192.168.5.201 -p 1080'
     ports:
       - 8889:1080/tcp
-    dns:
-      - 172.18.0.100
