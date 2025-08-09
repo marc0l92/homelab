@@ -25,7 +25,7 @@ services:
       BASE_URL: https://mealie.lucarotto.duckdns.org
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 9925:9000/tcp

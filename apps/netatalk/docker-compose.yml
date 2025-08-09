@@ -17,7 +17,7 @@ services:
       SERVER_NAME: minipc
       # PGID: "1000"
       # PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       - 548:548
     cap_add:

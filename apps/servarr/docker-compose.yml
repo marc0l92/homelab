@@ -13,7 +13,7 @@ services:
       VPN_TYPE: wireguard
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     labels:
       traefik.enable: true
       traefik.http.services.qbittorrent.loadbalancer.server.port: "8083"
@@ -136,7 +136,7 @@ services:
       # TORRENTING_PORT: ${FIREWALL_VPN_INPUT_PORTS} # airvpn forwarded port, pulled from stack.env
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /DATA/AppData/servarr/qbittorrent:/config
       - ${DOWNLOAD_FOLDER}:/downloads
@@ -161,7 +161,7 @@ services:
       HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -174,7 +174,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/nzbget:/config
@@ -192,7 +192,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/prowlarr:/config
@@ -212,7 +212,7 @@ services:
       CAPTCHA_SOLVER: none
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     depends_on:
       gluetun:
         condition: service_healthy
@@ -226,7 +226,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/radarr:/config
@@ -247,7 +247,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/sonarr:/config
@@ -268,7 +268,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/lidarr:/config
@@ -289,7 +289,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/bazarr:/config
@@ -310,7 +310,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config
@@ -331,7 +331,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/servarr/mylar:/config

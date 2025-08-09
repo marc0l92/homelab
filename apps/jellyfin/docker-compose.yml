@@ -27,7 +27,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 8096:8096/tcp # HTTP

@@ -32,7 +32,7 @@ services:
       EXPLICIT_FILTER: "false" # Set to true to filter out explicit content
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 7171:7171

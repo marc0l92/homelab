@@ -9,7 +9,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       - 80:80/tcp
       - 80:80/udp
@@ -29,7 +29,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       - 2280:80/tcp
       - 2280:80/udp

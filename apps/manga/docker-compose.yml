@@ -24,7 +24,7 @@ services:
       BIND_IP: 0.0.0.0
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 4567:4567/tcp
@@ -58,7 +58,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 5000:5000

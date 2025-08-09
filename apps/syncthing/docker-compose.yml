@@ -32,7 +32,7 @@ services:
       VIRTUAL_ENV: /lsiopy
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 8385:8384/tcp # Syncthing Web UI
@@ -93,7 +93,7 @@ services:
       VIRTUAL_ENV: /lsiopy
       PUID: "1000"
       PGID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 8384:8384/tcp # Syncthing Web UI

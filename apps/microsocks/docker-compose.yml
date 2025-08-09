@@ -9,7 +9,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     command:
       - '"/usr/local/bin/microsocks" -b 192.168.5.201 -p 1080'
     ports:

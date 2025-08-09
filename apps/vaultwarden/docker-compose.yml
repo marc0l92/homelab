@@ -30,7 +30,7 @@ services:
       ADMIN_TOKEN: ${ADMIN_TOKEN}
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /DATA/AppData/vaultwarden:/data
     ports: []

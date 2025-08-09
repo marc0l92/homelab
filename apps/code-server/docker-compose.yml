@@ -24,7 +24,7 @@ services:
       PGID: "1000"
       PUID: "1000"
       DEFAULT_WORKSPACE: /DATA/AppData
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 8087:8443/tcp

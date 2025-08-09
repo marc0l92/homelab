@@ -30,7 +30,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       # DNS
       - 53:53/tcp

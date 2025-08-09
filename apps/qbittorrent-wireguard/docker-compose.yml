@@ -16,7 +16,7 @@ services:
       WEBUI_URL: http://192.168.5.201:8080
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       - 8999:8999/tcp
       - 8999:8999/udp

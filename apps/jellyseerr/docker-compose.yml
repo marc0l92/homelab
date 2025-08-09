@@ -24,7 +24,7 @@ services:
       LOG_LEVEL: info
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 5055:5055/tcp

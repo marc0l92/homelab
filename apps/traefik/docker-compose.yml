@@ -26,7 +26,7 @@ services:
       DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       # Local reverse proxy
       - 80:80/tcp

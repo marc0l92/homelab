@@ -23,7 +23,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       # - 8000:8000/tcp # Portainer Agent
       - 9000:9000/tcp # Portainer UI

@@ -42,7 +42,7 @@ services:
       REDIS_HOSTNAME: immich-redis
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     env_file:
       - path: .env
         required: true
@@ -77,7 +77,7 @@ services:
       REDIS_HOSTNAME: immich-redis
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     env_file:
       - path: .env
         required: true
@@ -99,7 +99,7 @@ services:
     environment:
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     env_file:
       - path: .env
         required: true
@@ -127,7 +127,7 @@ services:
       POSTGRES_INITDB_ARGS: "--data-checksums"
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     env_file:
       - path: .env
         required: true

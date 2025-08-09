@@ -27,7 +27,7 @@ services:
       WG_PORT: "51820"
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports:
       - 51820:51820/udp # WireGuard
       # - 51821:51821/tcp # Web UI # Disabled in favor of Traefik routing

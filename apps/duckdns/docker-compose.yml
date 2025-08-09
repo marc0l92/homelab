@@ -13,7 +13,7 @@ services:
       UPDATE_IP: ipv6
       PGID: "1000"
       PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     volumes:
       - /DATA/AppData/duckdns:/config
     env_file:

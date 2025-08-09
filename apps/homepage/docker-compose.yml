@@ -24,7 +24,7 @@ services:
       HOMEPAGE_ALLOWED_HOSTS: 192.168.5.201:3000,homepage.lucarotto-local.duckdns.org,lucarotto-local.duckdns.org,homepage.l.lucarotto.it,l.lucarotto.it
       # PGID: "1000" # Root permission needed to access Docker socket
       # PUID: "1000"
-      TZ: Etc/UTC
+      TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
       # - 3000:3000/tcp
