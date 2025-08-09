@@ -87,6 +87,8 @@ services:
       - /DATA/AppData/immich/model-cache:/cache
     healthcheck:
       disable: false
+    dns:
+      - 172.18.0.100
 
 
   immich-redis:
@@ -107,6 +109,8 @@ services:
       - traefik
     healthcheck:
       test: redis-cli ping || exit 1
+    dns:
+      - 172.18.0.100
 
 
   immich-postgres:
@@ -131,6 +135,8 @@ services:
         required: false
     volumes:
       - /DATA/AppData/immich/pgdata:/var/lib/postgresql/data
+    dns:
+      - 172.18.0.100
 
 
 networks:
