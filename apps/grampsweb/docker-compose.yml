@@ -1,0 +1,70 @@
+name: grampsweb
+services:
+  grampsweb: &grampsweb
+    container_name: grampsweb
+    image: ghcr.io/gramps-project/grampsweb:latest
+    restart: unless-stopped
+    hostname: grampsweb
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.grampsweb.loadbalancer.server.port: "5000"
+
+      traefik.http.routers.grampsweb-duckdns-local.rule: Host(`grampsweb.lucarotto-local.duckdns.org`)
+      traefik.http.routers.grampsweb-duckdns-local.entrypoints: https
+      traefik.http.routers.grampsweb-duckdns-local.tls: true
+      traefik.http.routers.grampsweb-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.grampsweb-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.grampsweb-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.grampsweb-local.rule: Host(`grampsweb.l.lucarotto.it`)
+      traefik.http.routers.grampsweb-local.entrypoints: http
+
+      traefik.http.routers.grampsweb-internet.rule: Host(`tree.lucarotto.it`)
+      traefik.http.routers.grampsweb-internet.entrypoints: https-internet
+      traefik.http.routers.grampsweb-internet.tls: true
+      traefik.http.routers.grampsweb-internet.tls.certresolver: lucarotto-http
+    ports: []
+      # - "80:5000"  # host:docker
+    environment:
+      GRAMPSWEB_TREE: "Gramps Web"  # will create a new tree if not exists
+      GRAMPSWEB_CELERY_CONFIG__broker_url: "redis://grampsweb_redis:6379/0"
+      GRAMPSWEB_CELERY_CONFIG__result_backend: "redis://grampsweb_redis:6379/0"
+      GRAMPSWEB_RATELIMIT_STORAGE_URI: redis://grampsweb_redis:6379/1
+    depends_on:
+      - grampsweb_redis
+    volumes:
+      - /DATA/AppData/grampsweb/users:/app/users  # persist user database
+      - /DATA/AppData/grampsweb/index:/app/indexdir  # persist search index
+      - /DATA/AppData/grampsweb/thumb_cache:/app/thumbnail_cache  # persist thumbnails
+      - /DATA/AppData/grampsweb/cache:/app/cache  # persist export and report caches
+      - /DATA/AppData/grampsweb/secret:/app/secret  # persist flask secret
+      - /DATA/AppData/grampsweb/db:/root/.gramps/grampsdb  # persist Gramps database
+      - /DATA/AppData/grampsweb/media:/app/media  # persist media files
+    dns:
+      - 172.18.0.100
+
+  grampsweb_celery:
+    <<: *grampsweb  # YAML merge key copying the entire grampsweb service config
+    container_name: grampsweb_celery
+    hostname: grampsweb_celery
+    ports: []
+    labels: []
+    depends_on:
+      - grampsweb_redis
+    command: celery -A gramps_webapi.celery worker --loglevel=INFO --concurrency=2
+
+  grampsweb_redis:
+    container_name: grampsweb_redis
+    image: docker.io/library/redis:7.2.4-alpine
+    restart: unless-stopped
+    hostname: grampsweb_redis
+    networks:
+      - traefik
+    dns:
+      - 172.18.0.100
+
+networks:
+  traefik:
+    external: true
