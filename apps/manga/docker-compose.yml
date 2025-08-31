@@ -107,6 +107,42 @@ services:
     dns:
       - 172.18.0.100
 
+  komf:
+    container_name: komf
+    image: sndxr/komf:latest
+    restart: unless-stopped
+    hostname: komf
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.komf.loadbalancer.server.port: "8085"
+
+      traefik.http.routers.komf-duckdns-local.rule: Host(`komf.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+      traefik.http.routers.komf-duckdns-local.entrypoints: https
+      traefik.http.routers.komf-duckdns-local.tls: true
+      traefik.http.routers.komf-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.komf-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.komf-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.komf-local.rule: Host(`komf.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
+      traefik.http.routers.komf-local.entrypoints: http
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+      KOMF_LOG_LEVEL: INFO
+      # optional jvm options. Example config for low memory usage. Runs guaranteed cleanup up every 3600000ms(1hour)
+      JAVA_TOOL_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 8085:8085
+    volumes:
+      - /DATA/AppData/komf:/config
+      - /etc/localtime:/etc/localtime:ro
+    dns:
+      - 172.18.0.100
+
 networks:
   traefik:
     external: true
