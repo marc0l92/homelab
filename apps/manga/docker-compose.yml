@@ -131,7 +131,6 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris
-      KOMF_LOG_LEVEL: INFO
       # optional jvm options. Example config for low memory usage. Runs guaranteed cleanup up every 3600000ms(1hour)
       JAVA_TOOL_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000
     ports: []
