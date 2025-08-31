@@ -1,0 +1,102 @@
+name: paperless-ngx
+services:
+  paperless-ngx:
+    container_name: paperless-ngx
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    hostname: paperless-ngx
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.paperless-ngx.loadbalancer.server.port: "8000"
+
+      traefik.http.routers.paperless-ngx-duckdns-local.rule: Host(`paperless-ngx.lucarotto-local.duckdns.org`)
+      traefik.http.routers.paperless-ngx-duckdns-local.entrypoints: https
+      traefik.http.routers.paperless-ngx-duckdns-local.tls: true
+      traefik.http.routers.paperless-ngx-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.paperless-ngx-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.paperless-ngx-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.paperless-ngx-local.rule: Host(`paperless-ngx.l.lucarotto.it`)
+      traefik.http.routers.paperless-ngx-local.entrypoints: http
+    depends_on:
+      - paperless-redis
+      - gotenberg
+      - tika
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+      PAPERLESS_REDIS: redis://paperless-redis:6379
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - "8000:8000"
+    volumes:
+      - /DATA/AppData/paperless-ngx/data:/usr/src/paperless/data
+      - /DATA/AppData/paperless-ngx/media:/usr/src/paperless/media
+      - /DATA/AppData/paperless-ngx/export:/usr/src/paperless/export
+      - /DATA/AppData/paperless-ngx/consume:/usr/src/paperless/consume
+    env_file:
+      - path: .env
+        required: true
+      - path: ../../stack.env
+        required: false
+    dns:
+      - 172.18.0.100
+
+  paperless-redis:
+    container_name: paperless-redis
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    hostname: paperless-redis
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+    networks:
+      - traefik
+    dns:
+      - 172.18.0.100
+
+  gotenberg:
+    container_name: gotenberg
+    image: docker.io/gotenberg/gotenberg:8.20
+    restart: unless-stopped
+    hostname: gotenberg
+    networks:
+      - traefik
+    # The gotenberg chromium route is used to convert .eml files. We do not
+    # want to allow external content like tracking pixels or even javascript.
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+    dns:
+      - 172.18.0.100
+
+  tika:
+    container_name: tika
+    image: docker.io/apache/tika:latest
+    restart: unless-stopped
+    hostname: tika
+    networks:
+      - traefik
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+    dns:
+      - 172.18.0.100
+
+
+networks:
+  traefik:
+    external: true
