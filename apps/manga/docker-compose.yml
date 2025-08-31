@@ -35,35 +35,71 @@ services:
     dns:
       - 172.18.0.100
 
-  kavita:
-    container_name: kavita
-    image: jvmilazz0/kavita:latest
+  # kavita:
+  #   container_name: kavita
+  #   image: jvmilazz0/kavita:latest
+  #   restart: unless-stopped
+  #   hostname: kavita
+  #   networks:
+  #     - traefik
+  #   labels:
+  #     traefik.enable: true
+  #     traefik.http.services.kavita.loadbalancer.server.port: "5000"
+
+  #     traefik.http.routers.kavita-duckdns-local.rule: Host(`kavita.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+  #     traefik.http.routers.kavita-duckdns-local.entrypoints: https
+  #     traefik.http.routers.kavita-duckdns-local.tls: true
+  #     traefik.http.routers.kavita-duckdns-local.tls.certresolver: duckdns
+  #     traefik.http.routers.kavita-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+  #     traefik.http.routers.kavita-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+  #     traefik.http.routers.kavita-local.rule: Host(`kavita.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
+  #     traefik.http.routers.kavita-local.entrypoints: http
+  #   environment:
+  #     PGID: "1000"
+  #     PUID: "1000"
+  #     TZ: Europe/Paris
+  #   ports: []
+  #     # Disabled in favor of Traefik routing
+  #     # - 5000:5000
+  #   volumes:
+  #     - /DATA/AppData/kavita/config:/kavita/config
+  #     - /DATA/Downloads/suwayomi:/data/suwayomi
+  #     - /media:/media:rslave
+  #     - /mnt:/mnt:rslave
+  #     - /etc/localtime:/etc/localtime:ro
+  #   dns:
+  #     - 172.18.0.100
+
+  komga:
+    container_name: komga
+    image: gotson/komga:latest
     restart: unless-stopped
-    hostname: kavita
+    hostname: komga
     networks:
       - traefik
     labels:
       traefik.enable: true
-      traefik.http.services.kavita.loadbalancer.server.port: "5000"
+      traefik.http.services.komga.loadbalancer.server.port: "25600"
 
-      traefik.http.routers.kavita-duckdns-local.rule: Host(`kavita.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
-      traefik.http.routers.kavita-duckdns-local.entrypoints: https
-      traefik.http.routers.kavita-duckdns-local.tls: true
-      traefik.http.routers.kavita-duckdns-local.tls.certresolver: duckdns
-      traefik.http.routers.kavita-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.http.routers.kavita-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+      traefik.http.routers.komga-duckdns-local.rule: Host(`komga.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+      traefik.http.routers.komga-duckdns-local.entrypoints: https
+      traefik.http.routers.komga-duckdns-local.tls: true
+      traefik.http.routers.komga-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.komga-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.komga-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.http.routers.kavita-local.rule: Host(`kavita.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
-      traefik.http.routers.kavita-local.entrypoints: http
+      traefik.http.routers.komga-local.rule: Host(`komga.l.lucarotto.it`) || Host(`manga.l.lucarotto.it`)
+      traefik.http.routers.komga-local.entrypoints: http
     environment:
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris
     ports: []
       # Disabled in favor of Traefik routing
-      # - 5000:5000
+      # - 25600:25600
     volumes:
-      - /DATA/AppData/kavita/config:/kavita/config
+      - /DATA/AppData/komga/config:/config
       - /DATA/Downloads/suwayomi:/data/suwayomi
       - /media:/media:rslave
       - /mnt:/mnt:rslave
