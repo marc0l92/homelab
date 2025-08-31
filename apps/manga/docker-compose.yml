@@ -131,11 +131,14 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris
+      KOMF_KOMGA_BASE_URI: http://komga:25600
+      KOMF_KOMGA_USER: lucarellamarco@yahoo.it
+      KOMF_KOMGA_PASSWORD:
       # optional jvm options. Example config for low memory usage. Runs guaranteed cleanup up every 3600000ms(1hour)
       JAVA_TOOL_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000
-    ports: []
+    ports:
       # Disabled in favor of Traefik routing
-      # - 8085:8085
+      - 8085:8085
     volumes:
       - /DATA/AppData/komf:/config
       - /etc/localtime:/etc/localtime:ro
