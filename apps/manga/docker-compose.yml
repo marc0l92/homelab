@@ -11,7 +11,7 @@ services:
       traefik.enable: true
       traefik.http.services.suwayomi.loadbalancer.server.port: "4567"
 
-      traefik.http.routers.suwayomi-duckdns-local.rule: Host(`suwayomi.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+      traefik.http.routers.suwayomi-duckdns-local.rule: Host(`suwayomi.lucarotto-local.duckdns.org`)
       traefik.http.routers.suwayomi-duckdns-local.entrypoints: https
       traefik.http.routers.suwayomi-duckdns-local.tls: true
       traefik.http.routers.suwayomi-duckdns-local.tls.certresolver: duckdns
@@ -46,7 +46,7 @@ services:
   #     traefik.enable: true
   #     traefik.http.services.kavita.loadbalancer.server.port: "5000"
 
-  #     traefik.http.routers.kavita-duckdns-local.rule: Host(`kavita.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+  #     traefik.http.routers.kavita-duckdns-local.rule: Host(`kavita.lucarotto-local.duckdns.org`)
   #     traefik.http.routers.kavita-duckdns-local.entrypoints: https
   #     traefik.http.routers.kavita-duckdns-local.tls: true
   #     traefik.http.routers.kavita-duckdns-local.tls.certresolver: duckdns
@@ -82,7 +82,7 @@ services:
       traefik.enable: true
       traefik.http.services.komga.loadbalancer.server.port: "25600"
 
-      traefik.http.routers.komga-duckdns-local.rule: Host(`komga.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+      traefik.http.routers.komga-duckdns-local.rule: Host(`komga.lucarotto-local.duckdns.org`)
       traefik.http.routers.komga-duckdns-local.entrypoints: https
       traefik.http.routers.komga-duckdns-local.tls: true
       traefik.http.routers.komga-duckdns-local.tls.certresolver: duckdns
@@ -118,7 +118,7 @@ services:
       traefik.enable: true
       traefik.http.services.komf.loadbalancer.server.port: "8085"
 
-      traefik.http.routers.komf-duckdns-local.rule: Host(`komf.lucarotto-local.duckdns.org`) || Host(`manga.lucarotto-local.duckdns.org`)
+      traefik.http.routers.komf-duckdns-local.rule: Host(`komf.lucarotto-local.duckdns.org`)
       traefik.http.routers.komf-duckdns-local.entrypoints: https
       traefik.http.routers.komf-duckdns-local.tls: true
       traefik.http.routers.komf-duckdns-local.tls.certresolver: duckdns
