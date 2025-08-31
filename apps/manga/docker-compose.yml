@@ -95,6 +95,7 @@ services:
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris
+      KOMGA_CORS_ALLOWEDORIGINS: komf.lucarotto-local.duckdns.org
     ports: []
       # Disabled in favor of Traefik routing
       # - 25600:25600
