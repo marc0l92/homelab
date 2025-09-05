@@ -43,7 +43,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
-      - /DATA/AppData/traefik/config:/etc/traefik:ro
+      - /DATA/AppData/traefik/config:/etc/traefik:rslave
       - /DATA/AppData/traefik/certs:/var/traefik/certs:rw
     env_file:
       - path: .env
