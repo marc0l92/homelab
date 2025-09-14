@@ -2,7 +2,7 @@ name: jellyfin
 services:
   jellyfin:
     container_name: jellyfin
-    image: linuxserver/jellyfin:latest
+    image: ghcr.io/jellyfin/jellyfin:latest
     restart: unless-stopped
     hostname: jellyfin
     networks:
