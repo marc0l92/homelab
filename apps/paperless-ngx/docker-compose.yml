@@ -64,7 +64,7 @@ services:
 
   gotenberg:
     container_name: gotenberg
-    image: docker.io/gotenberg/gotenberg:8.20
+    image: docker.io/gotenberg/gotenberg:8.23
     restart: unless-stopped
     hostname: gotenberg
     networks:
