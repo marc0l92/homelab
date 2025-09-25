@@ -194,6 +194,7 @@ func main() {
 	}
 	action := os.Args[1]
 	dnsTxtName := os.Args[2]
+	dnsTxtName = strings.TrimSuffix(dnsTxtName, ".")
 	dnsTxtValue := os.Args[3]
 	if DEBUG {
 		fmt.Printf("[THDS][DEBUG] Action: %s, DNS TXT Name: %s, DNS TXT Value: %s\n", action, dnsTxtName, dnsTxtValue)
