@@ -36,7 +36,7 @@ func (cj *CookieJar) CookieHeader() string {
 
 func (cj *CookieJar) PrintCookies(context string) {
 	if DEBUG {
-		fmt.Printf("[DEBUG] Cookies after %s: ", context)
+		fmt.Printf("[THDS][DEBUG] Cookies after %s: ", context)
 		for _, c := range cj.cookies {
 			fmt.Printf("%s=%s; ", c.Name, c.Value)
 		}
@@ -64,12 +64,12 @@ func login(client *http.Client, cj *CookieJar, username, password string) error 
 
 	if DEBUG {
 		body, _ := io.ReadAll(resp.Body)
-		fmt.Printf("[DEBUG] login response: %s\n", string(body))
+		fmt.Printf("[THDS][DEBUG] login response: %s\n", string(body))
 		resp.Body = io.NopCloser(strings.NewReader(string(body)))
 	}
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("login failed, status code: %d", resp.StatusCode)
+		return fmt.Errorf("[THDS] login failed, status code: %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -95,12 +95,12 @@ func addTXTRecord(client *http.Client, cj *CookieJar, username, dnsTxtName, dnsT
 
 	if DEBUG {
 		body, _ := io.ReadAll(resp.Body)
-		fmt.Printf("[DEBUG] addTXTRecord response: %s\n", string(body))
+		fmt.Printf("[THDS][DEBUG] addTXTRecord response: %s\n", string(body))
 		resp.Body = io.NopCloser(strings.NewReader(string(body)))
 	}
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("add TXT record failed, status code: %d", resp.StatusCode)
+		return fmt.Errorf("[THDS] add TXT record failed, status code: %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -126,12 +126,12 @@ func deleteTXTRecord(client *http.Client, cj *CookieJar, recordId string) error 
 
 	if DEBUG {
 		body, _ := io.ReadAll(resp.Body)
-		fmt.Printf("[DEBUG] deleteTXTRecord response: %s\n", string(body))
+		fmt.Printf("[THDS][DEBUG] deleteTXTRecord response: %s\n", string(body))
 		resp.Body = io.NopCloser(strings.NewReader(string(body)))
 	}
 
 	if resp.StatusCode != 200 {
-		return fmt.Errorf("delete TXT record failed, status code: %d", resp.StatusCode)
+		return fmt.Errorf("[THDS] delete TXT record failed, status code: %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -156,14 +156,14 @@ func getDNSRecordID(client *http.Client, cj *CookieJar, dnsTxtName string) (stri
 	}
 
 	if DEBUG {
-		// fmt.Printf("[DEBUG] getDNSRecordID response: %s\n", string(body))
+		fmt.Printf("[THDS][DEBUG] getDNSRecordID response: %s\n", string(body))
 	}
 
 	// Find the table with id="dns-norm"
 	tableRe := regexp.MustCompile(`<table[^>]*id=["']dns-norm["'][^>]*>(.*?)<\/table>`) // get the table body
 	tableMatch := tableRe.FindSubmatch(body)
 	if tableMatch == nil {
-		return "", fmt.Errorf("dns-norm table not found")
+		return "", fmt.Errorf("[THDS] dns-norm table not found")
 	}
 	tableBody := tableMatch[1]
 
@@ -184,23 +184,31 @@ func getDNSRecordID(client *http.Client, cj *CookieJar, dnsTxtName string) (stri
 			}
 		}
 	}
-	return "", fmt.Errorf("record with name %s not found", dnsTxtName)
+	return "", fmt.Errorf("[THDS] record with name %s not found", dnsTxtName)
 }
 
 func main() {
 	if len(os.Args) != 4 {
-		fmt.Println("Usage: <program> <action> <dnsTxtName> <dnsTxtValue>")
+		fmt.Println("[THDS] Usage: <program> <action> <dnsTxtName> <dnsTxtValue>")
 		os.Exit(1)
 	}
 	action := os.Args[1]
 	dnsTxtName := os.Args[2]
 	dnsTxtValue := os.Args[3]
+	if DEBUG {
+		fmt.Printf("[THDS][DEBUG] Action: %s, DNS TXT Name: %s, DNS TXT Value: %s\n", action, dnsTxtName, dnsTxtValue)
+	}
+
+	if action != "present" && action != "cleanup" {
+		fmt.Println("[THDS] Error: action must be 'present' or 'cleanup'")
+		os.Exit(1)
+	}
 
 	username := os.Getenv("TOPHOST_USERNAME")
 	password := os.Getenv("TOPHOST_PASSWORD")
 
 	if username == "" || password == "" {
-		fmt.Println("Error: TOPHOST_USERNAME and TOPHOST_PASSWORD environment variables must be set")
+		fmt.Println("[THDS] Error: TOPHOST_USERNAME and TOPHOST_PASSWORD environment variables must be set")
 		os.Exit(1)
 	}
 
@@ -209,7 +217,7 @@ func main() {
 
 	err := login(client, cj, username, password)
 	if err != nil {
-		fmt.Printf("Login failed: %v\n", err)
+		fmt.Printf("[THDS] Login failed: %v\n", err)
 		os.Exit(1)
 	}
 
@@ -217,21 +225,21 @@ func main() {
 	case "present":
 		err := addTXTRecord(client, cj, username, dnsTxtName, dnsTxtValue)
 		if err != nil {
-			fmt.Printf("Error adding TXT record: %v\n", err)
+			fmt.Printf("[THDS] Error adding TXT record: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Println("TXT record added successfully.")
+		fmt.Println("[THDS] TXT record added successfully.")
 	case "cleanup":
 		recordId, err := getDNSRecordID(client, cj, dnsTxtName)
 		if err != nil {
-			fmt.Printf("Error getting DNS record ID: %v\n", err)
+			fmt.Printf("[THDS] Error getting DNS record ID: %v\n", err)
 			os.Exit(1)
 		}
 		err = deleteTXTRecord(client, cj, recordId)
 		if err != nil {
-			fmt.Printf("Error deleting TXT record: %v\n", err)
+			fmt.Printf("[THDS] Error deleting TXT record: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Println("TXT record cleaned up successfully.")
+		fmt.Println("[THDS] TXT record cleaned up successfully.")
 	}
 }
