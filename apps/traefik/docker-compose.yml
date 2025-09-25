@@ -26,6 +26,7 @@ services:
       EXEC_PATH: /scripts/tophost-dsn-challenge
       TOPHOST_USERNAME: ${TOPHOST_USERNAME}
       TOPHOST_PASSWORD: ${TOPHOST_PASSWORD}
+      TOPHOST_DOMAIN: lucarotto.it
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris

@@ -1,4 +1,4 @@
-// Required env variables TOPHOST_USERNAME and TOPHOST_PASSWORD
+// Required env variables TOPHOST_USERNAME and TOPHOST_PASSWORD and TOPHOST_DOMAIN
 package main
 
 import (
@@ -207,11 +207,14 @@ func main() {
 
 	username := os.Getenv("TOPHOST_USERNAME")
 	password := os.Getenv("TOPHOST_PASSWORD")
+	domain := os.Getenv("TOPHOST_DOMAIN")
 
 	if username == "" || password == "" {
 		fmt.Println("[THDS] Error: TOPHOST_USERNAME and TOPHOST_PASSWORD environment variables must be set")
 		os.Exit(1)
 	}
+
+	dnsTxtName = strings.TrimSuffix(dnsTxtName, "."+domain)
 
 	client := &http.Client{}
 	cj := NewCookieJar()
