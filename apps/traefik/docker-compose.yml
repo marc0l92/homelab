@@ -46,7 +46,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/traefik/config:/etc/traefik:rslave
       - /DATA/AppData/traefik/certs:/var/traefik/certs:rw
-      # - ./scripts:/scripts:ro
+      - ./scripts:/scripts:ro
     env_file:
       - path: .env
         required: true
