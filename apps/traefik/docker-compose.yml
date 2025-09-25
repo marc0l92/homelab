@@ -23,6 +23,7 @@ services:
       traefik.http.routers.traefik-local.entrypoints: http
     environment:
       DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
+      EXEC_PATH: /scripts/tophost-dsn-challenge
       TOPHOST_USERNAME: ${TOPHOST_USERNAME}
       TOPHOST_PASSWORD: ${TOPHOST_PASSWORD}
       PGID: "1000"
