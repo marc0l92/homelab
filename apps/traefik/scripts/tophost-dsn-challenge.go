@@ -1,7 +1,7 @@
+// Required env variables TOPHOST_USERNAME and TOPHOST_PASSWORD
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"net/http"
@@ -11,32 +11,6 @@ import (
 )
 
 var DEBUG = true
-
-func getCredentialsFromEnv() (string, string, error) {
-	file, err := os.Open(".env")
-	if err != nil {
-		return "", "", err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var username, password string
-	for scanner.Scan() {
-		line := scanner.Text()
-		if strings.HasPrefix(line, "USERNAME=") {
-			username = strings.TrimPrefix(line, "USERNAME=")
-		} else if strings.HasPrefix(line, "PASSWORD=") {
-			password = strings.TrimPrefix(line, "PASSWORD=")
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		return "", "", err
-	}
-	if username == "" || password == "" {
-		return "", "", fmt.Errorf("USERNAME or PASSWORD not found in .env file")
-	}
-	return username, password, nil
-}
 
 type CookieJar struct {
 	cookies map[string]*http.Cookie
@@ -222,16 +196,18 @@ func main() {
 	dnsTxtName := os.Args[2]
 	dnsTxtValue := os.Args[3]
 
-	username, password, err := getCredentialsFromEnv()
-	if err != nil {
-		fmt.Printf("Error reading credentials: %v\n", err)
+	username := os.Getenv("TOPHOST_USERNAME")
+	password := os.Getenv("TOPHOST_PASSWORD")
+
+	if username == "" || password == "" {
+		fmt.Println("Error: TOPHOST_USERNAME and TOPHOST_PASSWORD environment variables must be set")
 		os.Exit(1)
 	}
 
 	client := &http.Client{}
 	cj := NewCookieJar()
 
-	err = login(client, cj, username, password)
+	err := login(client, cj, username, password)
 	if err != nil {
 		fmt.Printf("Login failed: %v\n", err)
 		os.Exit(1)
@@ -239,7 +215,7 @@ func main() {
 
 	switch action {
 	case "present":
-		err = addTXTRecord(client, cj, username, dnsTxtName, dnsTxtValue)
+		err := addTXTRecord(client, cj, username, dnsTxtName, dnsTxtValue)
 		if err != nil {
 			fmt.Printf("Error adding TXT record: %v\n", err)
 			os.Exit(1)

@@ -22,8 +22,9 @@ services:
       traefik.http.routers.traefik-local.rule: Host(`traefik.l.lucarotto.it`)
       traefik.http.routers.traefik-local.entrypoints: http
     environment:
-      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
       DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
+      TOPHOST_USERNAME: ${TOPHOST_USERNAME}
+      TOPHOST_PASSWORD: ${TOPHOST_PASSWORD}
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris
