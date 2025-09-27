@@ -18,12 +18,12 @@ services:
       traefik.http.routers.dozzle-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
       traefik.http.routers.dozzle-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
 
-      traefik.http.routers.dozzle-local.rule: Host(`dozzle.l.lucarotto.it`)
-      traefik.http.routers.dozzle-local.entrypoints: https
-      traefik.http.routers.dozzle-local.tls: true
-      traefik.http.routers.dozzle-local.tls.certresolver: lucarotto-dns
-      traefik.http.routers.dozzle-local.tls.domains[0].main: l.lucarotto.it
-      traefik.http.routers.dozzle-local.tls.domains[0].sans: "*.l.lucarotto.it"
+      # traefik.http.routers.dozzle-local.rule: Host(`dozzle.l.lucarotto.it`)
+      # traefik.http.routers.dozzle-local.entrypoints: https
+      # traefik.http.routers.dozzle-local.tls: true
+      # traefik.http.routers.dozzle-local.tls.certresolver: lucarotto-dns
+      # traefik.http.routers.dozzle-local.tls.domains[0].main: l.lucarotto.it
+      # traefik.http.routers.dozzle-local.tls.domains[0].sans: "*.l.lucarotto.it"
     environment:
       DOZZLE_ENABLE_ACTIONS: "true"
       DOZZLE_ENABLE_SHELL: "true"
