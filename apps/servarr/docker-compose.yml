@@ -302,26 +302,26 @@ services:
         condition: service_healthy
         restart: true
 
-  mylar:
-    container_name: mylar
-    image: lscr.io/linuxserver/mylar3:latest
-    restart: unless-stopped
-    network_mode: service:gluetun
-    environment:
-      PGID: "1000"
-      PUID: "1000"
-      TZ: Europe/Paris
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /DATA/AppData/servarr/mylar:/config
-      - ${DATA_FOLDER}:/data/media:rslave
-      - ${DOWNLOAD_FOLDER}:/downloads
-      - /mnt:/mnt:rslave
-      - /media:/media:rslave
-    depends_on:
-      gluetun:
-        condition: service_healthy
-        restart: true
+  # mylar:
+  #   container_name: mylar
+  #   image: lscr.io/linuxserver/mylar3:latest
+  #   restart: unless-stopped
+  #   network_mode: service:gluetun
+  #   environment:
+  #     PGID: "1000"
+  #     PUID: "1000"
+  #     TZ: Europe/Paris
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - /DATA/AppData/servarr/mylar:/config
+  #     - ${DATA_FOLDER}:/data/media:rslave
+  #     - ${DOWNLOAD_FOLDER}:/downloads
+  #     - /mnt:/mnt:rslave
+  #     - /media:/media:rslave
+  #   depends_on:
+  #     gluetun:
+  #       condition: service_healthy
+  #       restart: true
 
   readarr:
     container_name: readarr
@@ -334,7 +334,7 @@ services:
       TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /DATA/AppData/servarr/mylar:/config
+      - /DATA/AppData/servarr/readarr:/config
       - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
