@@ -24,7 +24,6 @@ services:
       traefik.http.services.lidarr.loadbalancer.server.port: "8686"
       traefik.http.services.bazarr.loadbalancer.server.port: "6767"
       traefik.http.services.mylar.loadbalancer.server.port: "8090"
-      traefik.http.services.readarr.loadbalancer.server.port: "8787"
 
       traefik.http.routers.qbittorrent-duckdns-local.rule: Host(`qbittorrent.lucarotto-local.duckdns.org`)
       traefik.http.routers.qbittorrent-duckdns-local.service: qbittorrent
@@ -89,14 +88,6 @@ services:
       traefik.http.routers.mylar-duckdns-local.tls.certresolver: duckdns
       traefik.http.routers.mylar-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
       traefik.http.routers.mylar-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
-
-      traefik.http.routers.readarr-duckdns-local.rule: Host(`readarr.lucarotto-local.duckdns.org`)
-      traefik.http.routers.readarr-duckdns-local.service: readarr
-      traefik.http.routers.readarr-duckdns-local.entrypoints: https
-      traefik.http.routers.readarr-duckdns-local.tls: true
-      traefik.http.routers.readarr-duckdns-local.tls.certresolver: duckdns
-      traefik.http.routers.readarr-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
-      traefik.http.routers.readarr-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
     ports:
       - 8083:8083 # qbittorrent web interface
       # - 6881:6881 # qbittorrent torrent port
@@ -108,7 +99,6 @@ services:
       - 8686:8686 # lidarr
       - 6767:6767 # bazarr
       - 8090:8090 # mylar
-      - 8787:8787 # readarr
     volumes:
       - /DATA/AppData/servarr/gluetun:/gluetun
     env_file:
@@ -154,7 +144,7 @@ services:
   # # See the 'qBittorrent Stalls with VPN Timeout' section for more information.
   deunhealth:
     container_name: deunhealth
-    image: qmcgaw/deunhealth
+    image: qmcgaw/deunhealth:latest
     network_mode: none
     environment:
       LOG_LEVEL: info
@@ -302,30 +292,9 @@ services:
         condition: service_healthy
         restart: true
 
-  # mylar:
-  #   container_name: mylar
-  #   image: lscr.io/linuxserver/mylar3:latest
-  #   restart: unless-stopped
-  #   network_mode: service:gluetun
-  #   environment:
-  #     PGID: "1000"
-  #     PUID: "1000"
-  #     TZ: Europe/Paris
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - /DATA/AppData/servarr/mylar:/config
-  #     - ${DATA_FOLDER}:/data/media:rslave
-  #     - ${DOWNLOAD_FOLDER}:/downloads
-  #     - /mnt:/mnt:rslave
-  #     - /media:/media:rslave
-  #   depends_on:
-  #     gluetun:
-  #       condition: service_healthy
-  #       restart: true
-
-  readarr:
-    container_name: readarr
-    image: lscr.io/linuxserver/readarr:develop
+  mylar:
+    container_name: mylar
+    image: lscr.io/linuxserver/mylar3:latest
     restart: unless-stopped
     network_mode: service:gluetun
     environment:
@@ -334,7 +303,7 @@ services:
       TZ: Europe/Paris
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /DATA/AppData/servarr/readarr:/config
+      - /DATA/AppData/servarr/mylar:/config
       - ${DATA_FOLDER}:/data/media:rslave
       - ${DOWNLOAD_FOLDER}:/downloads
       - /mnt:/mnt:rslave
