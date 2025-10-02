@@ -59,7 +59,7 @@ services:
       - SETUID
       - SYS_CHROOT
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   syncthing-remote:
     container_name: syncthing-remote
@@ -119,7 +119,7 @@ services:
       - SETUID
       - SYS_CHROOT
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:

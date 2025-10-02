@@ -46,7 +46,7 @@ services:
       - "44"   # Your video GID
       - "993"  # Your render GID
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:

@@ -58,7 +58,7 @@ services:
     healthcheck:
       disable: false
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 
   immich-machine-learning:
@@ -88,7 +88,7 @@ services:
     healthcheck:
       disable: false
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 
   immich-redis:
@@ -110,7 +110,7 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 
   immich-postgres:
@@ -136,7 +136,7 @@ services:
     volumes:
       - /DATA/AppData/immich/pgdata:/var/lib/postgresql/data
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 
 networks:

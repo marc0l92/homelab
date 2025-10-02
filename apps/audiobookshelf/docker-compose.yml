@@ -33,7 +33,7 @@ services:
       - /DATA/AppData/audiobookshelf/data/config:/config
       - /DATA/AppData/audiobookshelf/data/metadata:/metadata
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:

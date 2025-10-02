@@ -46,7 +46,7 @@ services:
       - path: ../../stack.env
         required: false
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   paperless-redis:
     container_name: paperless-redis
@@ -60,7 +60,7 @@ services:
     networks:
       - traefik
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   gotenberg:
     container_name: gotenberg
@@ -80,7 +80,7 @@ services:
       PUID: "1000"
       TZ: Europe/Paris
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   tika:
     container_name: tika
@@ -94,7 +94,7 @@ services:
       PUID: "1000"
       TZ: Europe/Paris
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 
 networks:

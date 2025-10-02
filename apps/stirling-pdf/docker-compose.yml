@@ -35,7 +35,7 @@ services:
       - /DATA/AppData/stirling-pdf/customFiles:/customFiles
       - /DATA/AppData/stirling-pdf/pipeline:/pipeline
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:

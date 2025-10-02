@@ -33,7 +33,7 @@ services:
       - /DATA/Downloads/suwayomi:/downloads
       - /etc/localtime:/etc/localtime:ro
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   # kavita:
   #   container_name: kavita
@@ -69,7 +69,7 @@ services:
   #     - /mnt:/mnt:rslave
   #     - /etc/localtime:/etc/localtime:ro
   #   dns:
-  #     - 172.18.0.100
+  #     - 192.168.5.201
 
   komga:
     container_name: komga
@@ -106,7 +106,7 @@ services:
       - /mnt:/mnt:rslave
       - /etc/localtime:/etc/localtime:ro
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   komf:
     container_name: komf
@@ -144,7 +144,7 @@ services:
       - /DATA/AppData/komf:/config
       - /etc/localtime:/etc/localtime:ro
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:

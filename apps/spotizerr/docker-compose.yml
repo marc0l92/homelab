@@ -50,7 +50,7 @@ services:
       - path: ../../stack.env
         required: false
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
   spotizerr-redis:
     container_name: spotizerr-redis

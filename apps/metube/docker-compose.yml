@@ -32,7 +32,7 @@ services:
       - /mnt:/mnt:rslave
       - /media:/media:rslave
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:

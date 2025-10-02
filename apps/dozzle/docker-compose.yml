@@ -38,7 +38,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /DATA/AppData/dozzle:/data
     dns:
-      - 172.18.0.100
+      - 192.168.5.201
 
 networks:
   traefik:
