@@ -17,7 +17,7 @@ services:
     #     ipv4_address: 172.18.0.100
     labels:
       traefik.enable: true
-      # traefik.http.services.adguard.loadbalancer.server.port: "80"
+      # traefik.http.services.adguard.loadbalancer.server.port: "7780"
       traefik.http.services.adguard.loadbalancer.server.port: "3002"
 
       traefik.http.routers.adguard-duckdns-local.rule: Host(`adguard.lucarotto-local.duckdns.org`)
@@ -39,14 +39,14 @@ services:
       - 53:53/udp
 
       # DHCP
-      # - 67:68/udp
+      # - 67:67/udp
       # - 68:68/tcp
       # - 68:68/udp
 
       # Admin Panel
       # Disabled in favor of Traefik routing
-      - 3002:80/tcp # HTTP Admin Panel
-      # - 3003:443/tcp # HTTPS Admin Panel
+      - 3002:7780/tcp # HTTP Admin Panel
+      # - 3003:7443/tcp # HTTPS Admin Panel
 
       # DNS Over TLS
       - 853:853/tcp
