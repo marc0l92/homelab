@@ -23,7 +23,7 @@ services:
     environment:
       TS_AUTHKEY: ${TS_AUTHKEY}
       TS_HOSTNAME: minipc
-      TS_EXTRA_ARGS: --advertise-routes=192.168.5.201/32 --advertise-exit-node --login-server=https://headscale.lucarotto.it --accept-routes --exit-node-allow-lan-access
+      TS_EXTRA_ARGS: --advertise-routes=192.168.5.201/32 --advertise-exit-node --login-server=https://headscale.lucarotto.it --accept-routes
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: false
       PGID: "1000"
