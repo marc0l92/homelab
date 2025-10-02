@@ -17,7 +17,7 @@ services:
     #     ipv4_address: 172.18.0.100
     labels:
       traefik.enable: true
-      traefik.http.services.adguard.loadbalancer.server.port: "7780"
+      traefik.http.services.adguard.loadbalancer.servers[0].url: "http://192.168.5.201:7780"
 
       traefik.http.routers.adguard-duckdns-local.rule: Host(`adguard.lucarotto-local.duckdns.org`)
       traefik.http.routers.adguard-duckdns-local.entrypoints: https
