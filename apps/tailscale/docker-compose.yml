@@ -26,6 +26,7 @@ services:
       TS_EXTRA_ARGS: --advertise-routes=192.168.5.201/32 --advertise-exit-node --login-server=https://headscale.lucarotto.it --accept-routes
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: false
+      TS_ACCEPT_DNS: true
       PGID: "1000"
       PUID: "1000"
       TZ: Europe/Paris
@@ -38,6 +39,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
+      - sys_module
     env_file:
       - path: .env
         required: true
