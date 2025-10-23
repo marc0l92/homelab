@@ -30,7 +30,7 @@ services:
       # Disabled in favor of Traefik routing
       # - 8001:8000/tcp
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /DATA/AppData/cup:/config
     dns:
       - 192.168.5.201

@@ -113,6 +113,7 @@ services:
       - /DATA/AppData/headplane/config:/etc/headplane
       - /DATA/AppData/headplane/data:/var/lib/headplane
       - /DATA/AppData/headscale/config:/etc/headscale
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     dns:
       - 192.168.5.201
 

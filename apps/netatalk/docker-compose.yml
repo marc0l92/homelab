@@ -45,7 +45,7 @@ services:
   #     - 10000:10000
   #   volumes:
   #     - /DATA/AppData/netatalk/conf:/etc/netatalk
-  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
   #   environment:
   #     WEBMIN_USER: ${WEBMIN_USER}
   #     WEBMIN_PASS: ${WEBMIN_PASS}
