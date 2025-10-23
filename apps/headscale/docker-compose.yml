@@ -110,6 +110,7 @@ services:
     volumes:
       - /DATA/AppData/headplane/config:/etc/headplane
       - /DATA/AppData/headplane/data:/var/lib/headplane
+      - /DATA/AppData/headscale/config:/etc/headscale
     dns:
       - 192.168.5.201
 
