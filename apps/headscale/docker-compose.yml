@@ -26,6 +26,8 @@ services:
       traefik.http.routers.headscale-internet.entrypoints: https-internet
       traefik.http.routers.headscale-internet.tls: true
       traefik.http.routers.headscale-internet.tls.certresolver: lucarotto-http
+
+      me.tale.headplane.target: headscale
     environment:
       PGID: "1000"
       PUID: "1000"
