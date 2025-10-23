@@ -76,6 +76,43 @@ services:
     dns:
       - 192.168.5.201
 
+  headplane:
+    container_name: headplane
+    image: ghcr.io/tale/headplane:latest
+    restart: unless-stopped
+    hostname: headplane
+    networks:
+      - traefik
+    labels:
+      traefik.enable: true
+      traefik.http.services.headplane.loadbalancer.server.port: "3000"
+
+      traefik.http.routers.headplane-duckdns-local.rule: Host(`headscale.lucarotto-local.duckdns.org`) && PathPrefix(`/admin`)
+      traefik.http.routers.headplane-duckdns-local.entrypoints: https
+      traefik.http.routers.headplane-duckdns-local.tls: true
+      traefik.http.routers.headplane-duckdns-local.tls.certresolver: duckdns
+      traefik.http.routers.headplane-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+      traefik.http.routers.headplane-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+      traefik.http.routers.headplane-local.rule: Host(`headscale.l.lucarotto.it`) && PathPrefix(`/admin`)
+      traefik.http.routers.headplane-local.entrypoints: http
+    depends_on:
+      headscale:
+        condition: service_started
+        required: true
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - '3000:3000'
+    volumes:
+      - /DATA/AppData/headplane/config:/etc/headplane
+      - /DATA/AppData/headplane/data:/var/lib/headplane
+    dns:
+      - 192.168.5.201
+
 networks:
   traefik:
     external: true
