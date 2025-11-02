@@ -1,0 +1,46 @@
+name: music
+services:
+  shairport-sync:
+    container_name: shairport-sync
+    image: mikebrady/shairport-sync:latest
+    restart: unless-stopped
+    hostname: shairport-sync
+    network_mode: host
+    # networks:
+    #   - traefik
+    # labels:
+    #   traefik.enable: true
+    #   traefik.http.services.shairport-sync.loadbalancer.server.port: "4533"
+
+    #   traefik.http.routers.shairport-sync-duckdns-local.rule: Host(`shairport-sync.lucarotto-local.duckdns.org`)
+    #   traefik.http.routers.shairport-sync-duckdns-local.entrypoints: https
+    #   traefik.http.routers.shairport-sync-duckdns-local.tls: true
+    #   traefik.http.routers.shairport-sync-duckdns-local.tls.certresolver: duckdns
+    #   traefik.http.routers.shairport-sync-duckdns-local.tls.domains[0].main: lucarotto-local.duckdns.org
+    #   traefik.http.routers.shairport-sync-duckdns-local.tls.domains[0].sans: "*.lucarotto-local.duckdns.org"
+
+    #   traefik.http.routers.shairport-sync-local.rule: Host(`shairport-sync.l.lucarotto.it`)
+    #   traefik.http.routers.shairport-sync-local.entrypoints: http
+    environment:
+      PGID: "1000"
+      PUID: "1000"
+      TZ: Europe/Paris
+      S6_KEEP_ENV: 1 # Allow S6 to pass environment variables from compose file
+      PULSE_SERVER: unix:/tmp/pulseaudio.socket # Path for PulseAudio socket
+      PULSE_COOKIE: /tmp/pulseaudio.cookie # Path for PulseAudio cookie
+    ports: []
+      # Disabled in favor of Traefik routing
+      # - 3689:3689/tcp 
+    volumes:
+      - /DATA/AppData/shairport-sync/shairport-sync.conf:/etc/shairport-sync.conf
+      - /run/user/1000/pulse/native:/tmp/pulseaudio.socket # PulseAudio socket
+    devices:
+      - /dev/snd
+    cap_add:
+      - SYS_NICE
+    dns:
+      - 192.168.5.201
+
+networks:
+  traefik:
+    external: true
