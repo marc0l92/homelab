@@ -50,6 +50,10 @@ services:
       TZ: Europe/Paris
     volumes:
       - /run/user/1000/pulse:/run/user/1000/pulse
+    devices:
+      - /dev/snd
+    cap_add:
+      - SYS_NICE
     env_file:
       - path: .env
         required: true
@@ -96,6 +100,8 @@ services:
         required: true
       - path: ../../stack.env
         required: false
+    dns:
+      - 192.168.5.201
 
 networks:
   traefik:
