@@ -27,7 +27,8 @@ services:
 
   ffmpeg:
     container_name: ffmpeg
-    image: linuxserver/ffmpeg:latest
+    # image: linuxserver/ffmpeg:latest
+    image: jess/ffmpeg
     restart: unless-stopped
     hostname: ffmpeg
     network_mode: "host" # required if you capture from PulseAudio
