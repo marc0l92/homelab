@@ -30,12 +30,12 @@ services:
     image: jrottenberg/ffmpeg:6.0-ubuntu
     restart: unless-stopped
     hostname: ffmpeg
-    networks:
-      - traefik
+    network_mode: "host" # required if you capture from PulseAudio
+    # networks:
+    #   - traefik
     depends_on:
       - icecast
       - shairport-sync
-    # network_mode: "host" # required if you capture from PulseAudio
     command: >
       bash -c "
       ffmpeg
