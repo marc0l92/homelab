@@ -53,7 +53,7 @@ services:
       TZ: Europe/Paris
     volumes:
       - /run/user/1000/pulse:/run/user/1000/pulse
-      - /home/marco/.config/pulse/cookie:/home/ffmpeguser/.config/pulse/cookie:ro
+      - /home/marco/.config/pulse/cookie:/root/.config/pulse/cookie:ro
     devices:
       - /dev/snd
     cap_add:
