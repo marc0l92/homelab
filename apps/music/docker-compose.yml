@@ -17,7 +17,7 @@ services:
     volumes:
       - /DATA/AppData/shairport-sync/shairport-sync.conf:/etc/shairport-sync.conf
       - /run/user/1000/pulse/native:/tmp/pulseaudio.socket # PulseAudio socket
-      - /home/marco/.config/pulse/cookie:/tmp/pulseaudio.cookie # PulseAudio cookie
+      - /home/marco/.config/pulse/cookie:/tmp/pulseaudio.cookie:ro # PulseAudio cookie
     devices:
       - /dev/snd
     cap_add:
@@ -53,6 +53,7 @@ services:
       TZ: Europe/Paris
     volumes:
       - /run/user/1000/pulse:/run/user/1000/pulse
+      - /home/marco/.config/pulse/cookie:/home/pulse/.config/pulse/cookie:ro
     devices:
       - /dev/snd
     cap_add:
