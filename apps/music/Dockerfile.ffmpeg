@@ -1,5 +1,8 @@
-FROM linuxserver/ffmpeg:latest
+FROM ubuntu:24.04
 
+# Install FFmpeg build dependencies + PulseAudio
 RUN apt-get update && apt-get install -y \
-    libpulse0 pulseaudio-utils \
+    ffmpeg libpulse-dev pulseaudio-utils \
     && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["ffmpeg"]
