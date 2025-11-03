@@ -27,7 +27,7 @@ services:
 
   ffmpeg:
     container_name: ffmpeg
-    image: jrottenberg/ffmpeg:6.0-ubuntu:latest
+    image: jrottenberg/ffmpeg:6.0-ubuntu
     restart: unless-stopped
     hostname: ffmpeg
     networks:
@@ -58,7 +58,7 @@ services:
 
   icecast:
     container_name: icecast
-    image: moul/icecast:latest
+    image: moul/icecast
     restart: unless-stopped
     hostname: icecast
     networks:
