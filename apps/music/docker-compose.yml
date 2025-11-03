@@ -35,7 +35,7 @@ services:
     depends_on:
       - icecast
       - shairport-sync
-    network_mode: "host" # required if you capture from PulseAudio
+    # network_mode: "host" # required if you capture from PulseAudio
     command: >
       bash -c "
       ffmpeg
